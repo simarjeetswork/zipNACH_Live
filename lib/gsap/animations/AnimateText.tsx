@@ -8,10 +8,12 @@ export default function AnimatedText({
     children,
     as: Tag = 'p',
     className = '',
+    delay = 0
 }: {
     children: React.ReactNode;
     as?: ElementType;
     className?: string;
+    delay?: number;
 }) {
     const ref = useRef<HTMLElement>(null);
 
@@ -20,15 +22,16 @@ export default function AnimatedText({
         gsap.from(ref.current, {
             opacity: 0,
             y: 40,
+            delay: delay,
             duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: ref.current,
                 start: 'top 85%',
-                toggleActions: 'play none none reverse',
+                toggleActions: 'play none none none',
             },
         });
-    }, { scope: ref });
+    }, { scope: ref, dependencies: [] });
 
     return <Tag ref={ref} className={className}>{children}</Tag>;
 }

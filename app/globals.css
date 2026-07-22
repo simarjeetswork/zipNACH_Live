@@ -6,13 +6,26 @@
   --font-primary: var(--font-geist);
   --font-secondary: var(--font-open-sans);
   --font-mono: var(--font-geist-mono);
-  --color-primary: #004ADE;
-  --text-gray: #67758F;
-  --text-heading-dark: #032656;
-  --border-blue: #3F89FF;
+
   --transition: all .3s ease;
 
+}
+
+
+@theme {
+  --color-blue: #3F89FF;
+  --color-off: #F1F7FF;
+  --color-primary: #004ADE;
+  --color-gray: #67758F;
+  --color-heading: #032656;
+  --color-para: #00000099;
+  --border-blue: #3F89FF;
+  --color-chip: #3F89FF1A;
+  --color-shade: #DFECFF;
+  --color-sub:#000000E5;
+
   /* Font  */
+
   --text-xs: 0.75rem;
   /* 12px */
   --text-sm: 0.875rem;
@@ -31,9 +44,11 @@
   /* 36px */
   --text-5xl: 2.5rem;
   /* 40px */
-  --text-6xl: 3.375;
+  --text-6xl: 3.375rem;
   /* 56px */
+
 }
+
 
 .font-primary {
   font-family: var(--font-primary);
@@ -79,7 +94,7 @@ body {
   }
 
   @media (width >=1536px) {
-    max-width: 1800px;
+    max-width: 1600px;
     /* Custom */
   }
 }
@@ -97,6 +112,13 @@ body {
 
 .animate-diagonal-travel {
   animation: diagonal-travel 4.5s ease-in-out infinite alternate;
+}
+
+.bx_ptrn {
+  background:
+    linear-gradient(rgba(63, 137, 255, 0.06) 1px, transparent 0),
+    linear-gradient(90deg, rgba(63, 137, 255, 0.06) 1px, transparent 0);
+  background-size: 90px 90px;
 }
 
 @keyframes diagonal-travel {

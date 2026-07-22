@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import PricingModel from "@/components/layout/PricingModel";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -35,6 +36,7 @@ export default function RootLayout({
       <SmoothScrollProvider>
         <Header />
         {children}
+        <PricingModel />
         <Footer />
       </SmoothScrollProvider>
     </body>
