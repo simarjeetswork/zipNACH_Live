@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --font-primary: var(--font-geist);
+  --font-secondary: var(--font-open-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-primary: #004ADE;
+  --text-gray: #67758F;
+  --text-heading-dark: #032656;
+  --border-blue: #3F89FF;
+  --transition: all .3s ease;
+
+  /* Font  */
+  --text-xs: 0.75rem;
+  /* 12px */
+  --text-sm: 0.875rem;
+  /* 14px */
+  --text-base: 1rem;
+  /* 16px */
+  --text-lg: 1.125rem;
+  /* 18px */
+  --text-xl: 1.25rem;
+  /* 20px */
+  --text-2xl: 1.5rem;
+  /* 24px */
+  --text-3xl: 1.875rem;
+  /* 30px */
+  --text-4xl: 2.25rem;
+  /* 36px */
+  --text-5xl: 2.5rem;
+  /* 40px */
+  --text-6xl: 3.375;
+  /* 56px */
+}
+
+.font-primary {
+  font-family: var(--font-primary);
+}
+
+.font-secondary {
+  font-family: var(--font-secondary);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-secondary);
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 0rem;
+
+  @media (width >=640px) {
+    max-width: 640px;
+  }
+
+  @media (width >=768px) {
+    max-width: 768px;
+  }
+
+  @media (width >=800px) {
+    max-width: 850px;
+  }
+
+  @media (width >=1024px) {
+    max-width: 1024px;
+  }
+
+  @media (width >=1280px) {
+    max-width: 1200px;
+    /* Custom */
+  }
+
+  @media (width >=1536px) {
+    max-width: 1800px;
+    /* Custom */
+  }
+}
+
+/* @media (width <=1560px) {
+  :root {
+    --text-heading: 3.0rem;
+    --text-headingSub: 2.1rem;
+    --text-display: 1.33rem;
+    --text-displayOp: 1.275rem;
+    --text-secondary: 1.625rem;
+    --text-navbar: 1.075rem;
+  }
+} */
+
+.animate-diagonal-travel {
+  animation: diagonal-travel 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes diagonal-travel {
+  from {
+    left: 100%;
+    top: 0%;
+  }
+
+  to {
+    left: 0%;
+    top: 100%;
+  }
+}
