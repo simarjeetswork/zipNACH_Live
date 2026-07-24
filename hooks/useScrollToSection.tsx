@@ -12,7 +12,7 @@ export function useScrollToSection(offsetY: number = NAV_HEIGHT) {
                 duration: 1.2,
                 scrollTo: {
                     y: `#${id}`,
-                    offsetY,
+                    offsetY,    
                 },
                 ease: 'power3.inOut',
             });

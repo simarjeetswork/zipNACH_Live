@@ -120,6 +120,7 @@ body {
     linear-gradient(90deg, rgba(63, 137, 255, 0.06) 1px, transparent 0);
   background-size: 90px 90px;
 }
+
 /* globals.css */
 .txt_grd {
   background: linear-gradient(182.15deg, rgba(255, 255, 255, 0.116) 21.98%, rgba(255, 255, 255, 0) 89.83%);
