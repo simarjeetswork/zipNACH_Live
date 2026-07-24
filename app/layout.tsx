@@ -36,7 +36,6 @@ export default function RootLayout({
       <SmoothScrollProvider>
         <Header />
         {children}
-        <PricingModel />
         <Footer />
       </SmoothScrollProvider>
     </body>

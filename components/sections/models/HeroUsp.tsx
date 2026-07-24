@@ -56,12 +56,12 @@ export default function HeroUsp() {
 
 
         <>
-            <div className="flex flex-row gap-4 justify-between w-full mt-20 border-t border-[#b3b3b360] pt-4" ref={secRef}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-between w-full mt-15 sm:mt-20 border-t border-[#b3b3b360] pt-4" ref={secRef}>
                 {data.map((item) => {
                     return (
                         <div key={item.id} className="w-auto flex-item-start justify-start">
-                            <p className="text-sm font-mono leading-[180%] uppercase text-para">{item.heading}</p>
-                            <Counter delay="0.7" end={item.data} suffix={item.suffix} className="text-[#00000099] text-xl font-mono leading-[120%] font-medium" />
+                            <p className=" text-xs sm:text-sm font-mono leading-[180%] uppercase text-para">{item.heading}</p>
+                            <Counter delay="0.7" end={item.data} suffix={item.suffix} className="text-[#00000099] text-base sm:text-xl font-mono leading-[120%] font-medium" />
 
                         </div>
                     )

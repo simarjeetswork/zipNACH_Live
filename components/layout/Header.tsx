@@ -34,7 +34,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="relative border-b border-[#B3B3B366] bg-white z-2">
+    <header className="fixed w-full top-0 border-b border-[#B3B3B366] bg-white z-[999]">
       <div className="container flex h-[68px] items-center justify-between px-4 md:px-8">
         {/* Logo */}
         <Link href="/" onClick={() => setMobileOpen(false)}>

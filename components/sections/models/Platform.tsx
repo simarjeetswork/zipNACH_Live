@@ -4,9 +4,9 @@ import AnimatedText from "@/lib/gsap/animations/AnimateText";
 import { ArrowRight } from "lucide-react";
 import { aggregator, corporates, bank } from "@/public/images";
 import Image from "next/image";
-import Link from "next/link";
 import { useGSAP, gsap, ScrollTrigger } from "@/lib/gsap/gsap";
 import { useRef } from "react";
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 export default function Platform() {
     const plans = [
         {
@@ -37,10 +37,11 @@ export default function Platform() {
             href: '/plans/aggregator',
         },
     ];
-    const container = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const scrollToSection = useScrollToSection();
     useGSAP(
         () => {
-            const box = gsap.utils.selector(container);
+            const box = gsap.utils.selector(containerRef);
             ScrollTrigger.batch(box(".mdl_bx"), {
                 start: "top 80%",
                 once: true,
@@ -59,29 +60,29 @@ export default function Platform() {
                 },
             });
 
-        }, { scope: container, dependencies: [] }
+        }, { scope: containerRef, dependencies: [] }
     );
     return (
         <>
-            <section className="mod_plfr_x py-20 px-6 relative overflow-hidden bg-off" ref={container}>
+            <section className="mod_plfr_x py-20 px-6 relative overflow-hidden bg-off" ref={containerRef}>
                 <div className="container mx-auto ">
                     <div className="relative z-1">
-                        <AnimatedText as="p" className="text-blue text-start text-sm uppercase font-mono font-normal bg-chip inline-block px-4 rounded-2xl py-1 mb-5">Deployment Models</AnimatedText>
-                        <Heading as="h2" className=" text-5xl leading-[110%] text-start font-light font-primary text-heading mb-10">One platform. <br />
+                        <AnimatedText as="p" className="text-blue text-start text-xs sm:text-sm uppercase font-mono font-normal bg-chip inline-block px-4 rounded-2xl py-1 mb-5">Deployment Models</AnimatedText>
+                        <Heading as="h2" className=" text-2xl sm:text-4xl xl:text-5xl leading-[110%] text-start font-light font-primary text-heading mb-10">One platform. <br />
                             <span className="text-primary font-medium">Three operating models.</span></Heading>
-                        <div className="grid grid-cols-3 gap-5">
+                        <div className=" grid grid-cols-1 lg:grid-cols-3 gap-5">
                             {plans.map((plan, index) => (
-                                <div key={index} className="bg-shade rounded-[4px] p-10 flex flex-col h-full justify-between mdl_bx opacity-0">
+                                <div key={index} className="bg-shade rounded-[4px] p-7 sm:p-10 flex flex-col h-full justify-between mdl_bx opacity-0">
                                     <div className="w-full flex-1">
                                         <div className="w-[50px] h-[50px] relative mb-7">
                                             <Image width={100} height={100} className="object-contain" src={plan.icon} alt={plan.title} />
                                         </div>
 
-                                        <h3 className="text-2xl font-medium leading-[120%] text-start text-sub font-primary mb-3">{plan.title}</h3>
+                                        <h3 className=" text-xl sm:text-2xl font-medium leading-[120%] text-start text-sub font-primary mb-3">{plan.title}</h3>
                                         <p className="text-sm font-normal leading-[180%] text-para mb-4">{plan.description}</p>
                                         <p className="text-xs italic font-normal leading-[180%] text-para mb-7">{plan.suitableFor}</p>
                                     </div>              <div>
-                                        <Link href="/" className="text-xs font-normal font-mono leading-[120%] text-primary text-center p-3 bg-white rounded-sm inline-flex flex-row w-auto gap-2">View Plan <span><ArrowRight size={16} /></span></Link>
+                                        <button onClick={() => scrollToSection('plans')} className="text-xs font-normal font-mono leading-[120%] cursor-pointer text-primary text-center p-3 bg-white rounded-sm inline-flex flex-row w-auto gap-2">View Plan <span><ArrowRight size={16} /></span></button>
                                     </div>
                                 </div>
                             ))}

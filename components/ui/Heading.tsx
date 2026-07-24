@@ -62,7 +62,7 @@ const Heading = ({
                 }
             );
         },
-        { scope: headingRef,dependencies: [] }
+        { scope: headingRef, dependencies: [] }
     );
 
     const Tag = as as ElementType;

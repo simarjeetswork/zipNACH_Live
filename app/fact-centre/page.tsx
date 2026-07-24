@@ -1,4 +1,7 @@
 
+import Glance from '@/components/sections/factCentre/Glance';
+import HeroFact from '@/components/sections/factCentre/HeroFact';
+import Metrics from '@/components/sections/factCentre/Metrics';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,7 +11,10 @@ export const metadata: Metadata = {
 export default function FactCentre() {
     return (
         <>
-            <h1>Fact Centre</h1>
+            <HeroFact />
+            <Glance />
+            <Metrics />
+
         </>
     );
 }
