@@ -7,7 +7,7 @@ export default function HeroFact() {
 
     return (
         <>
-            <section className="fxt_hr_x pt-28 pb-25 px-6 relative  bg-[#F1F7FF] overflow-hidden h-dvh flex items-center">
+            <section className="fxt_hr_x pt-28 pb-25 px-6 relative  bg-[#F1F7FF] overflow-hidden min-h-dvh flex items-center">
                 <div className="absolute left-0 top-0 w-full h-full bx_ptrn"></div>
                 <div className="container mx-auto">
                     <div className="relative z-1 w-full text-center">

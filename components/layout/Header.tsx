@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { useLenis } from "../SmoothScrollProvider";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -16,7 +17,18 @@ const navLinks = [
 export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const lenis = useLenis();
+  useEffect(() => {
+    if (!lenis) return;
 
+    if (mobileOpen) {
+      lenis.stop();
+      document.body.style.overflow = "hidden";
+    } else {
+      lenis.start();
+      document.body.style.overflow = "auto";
+    }
+  }, [mobileOpen, lenis]);
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
@@ -33,8 +45,8 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] border-b border-[#B3B3B366] bg-white shadow-sm">
-      <div className="container flex h-[68px] items-center justify-between px-4 md:px-8">
+    <header className="fixed top-0 left-0 right-0 z-[100] border-b border-[#B3B3B366] bg-white shadow-sm  px-6">
+      <div className="container flex h-[68px] items-center justify-between">
         {/* Logo */}
         <Link href="/" onClick={() => setMobileOpen(false)}>
           <Image
@@ -86,7 +98,7 @@ export default function Header() {
       </div>
 
       <div
-        className={`fixed inset-0 z-50 flex flex-col bg-white transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden ${mobileOpen
+        className={`fixed inset-0 z-50 flex flex-col bg-white transition-all duration-500 ease-in-out  lg:hidden ${mobileOpen
           ? "translate-y-0 opacity-100 pointer-events-auto"
           : "-translate-y-full opacity-0 pointer-events-none"
           }`}

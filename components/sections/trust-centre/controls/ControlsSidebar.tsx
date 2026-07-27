@@ -10,7 +10,7 @@ export default function ControlsSidebar({
   activeSection,
 }: Props) {
   return (
-    <aside className="md:sticky top-[140px] self-start">
+    <aside className="md:sticky top-[140px] self-start lg:block hidden">
       <h3 className="mb-3 leading-[120%] text-xl font-medium text-[#041026] font-primary">
         Controls
       </h3>

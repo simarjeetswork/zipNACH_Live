@@ -6,15 +6,46 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GridBackground from "../ui/GridBackground";
+import { once } from "events";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const navLinks = ["HOME", "ZIPNACH MODELS", "TRUST CENTRE", "FACT CENTRE"];
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "ZipNACH Models", href: "/models" },
+  { name: "Trust Centre", href: "/trust-centre" },
+  { name: "Fact Centre", href: "/fact-centre" },
+];
+
 
 export default function Footer() {
+  const footerImgRef = useRef<HTMLImageElement>(null)
+  const footerRef = useRef<HTMLDivElement>(null)
+  useGSAP(
+    () => {
+      gsap.fromTo(footerImgRef.current, {
+        y: 200,
+        opacity: 0,
+      },
+        {
+          y: 0,
+          opacity: 1,
+          delay: 0.7,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top 70%",
+            end: "bottom 20%",
+            scrub: 1
+          }
+        });
+    },
+
+  ), { scope: footerRef, dependencies: [] }
 
   return (
-    <footer className="relative overflow-hidden pt-10 md:pt-16">
+    <footer className="relative overflow-hidden px-6 pt-15" ref={footerRef}>
       {/* Background */}
       <GridBackground />
       <div className="container relative z-1">
@@ -24,15 +55,15 @@ export default function Footer() {
             <Image
               src="/images/logo.svg"
               alt="ZipNACH"
-              width={140}
+              width={120}
               height={36}
             />
-            <p className="mt-4 leading-[160%] text-[var(--color-gray)] ">
+            <p className="mt-4 leading-[160%] text-base text-gray ">
               Operational intelligence infrastructure for NACH mandate
               validation, digitization and automation — built for banks, NBFCs
               and fintechs.
             </p>
-            <div className="mt-8 flex flex-col gap-x-10 gap-y-4 text-[var(--color-gray)] md:flex-row">
+            <div className="mt-8 flex flex-col gap-x-10 gap-y-4 text-gray md:flex-row">
               {/* Email */}
               <div className="flex items-center gap-3">
                 <Image
@@ -41,12 +72,12 @@ export default function Footer() {
                   width={19}
                   height={15}
                 />
-                <a
+                <Link
                   href="mailto:sales@yoekisoft.com"
                   className="transition-colors hover:text-[#004ADE]"
                 >
                   sales@yoekisoft.com
-                </a>
+                </Link>
               </div>
 
               {/* Phone */}
@@ -105,14 +136,14 @@ export default function Footer() {
           </div>
 
           {/* Right Navigation */}
-          <nav className="flex flex-wrap justify-start gap-4 xl:gap-8 text-[14px] uppercase text-[var(--color-gray)] lg:justify-end ">
+          <nav className="flex flex-wrap justify-start gap-4 xl:gap-8 text-sm uppercase text-[var(--color-gray)] lg:justify-end ">
             {navLinks.map((item) => (
               <Link
-                key={item}
-                href="#"
+                key={item.name}
+                href={item.href}
                 className="transition-colors duration-300 hover:text-[#004ADE] font-medium"
               >
-                {item}
+                {item.name}
               </Link>
             ))}
           </nav>
@@ -125,6 +156,7 @@ export default function Footer() {
             src="/images/zipnach.png"
             alt="ZipNACH"
             width={802}
+            ref={footerImgRef}
             height={288}
           />
         </div>

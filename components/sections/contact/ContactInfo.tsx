@@ -6,12 +6,12 @@ import Heading from "@/components/ui/Heading";
 
 export default function ContactInfo() {
   return (
-    <div className="rounded-tl-xl rounded-bl-xl border-t border-l border-b  border-[#E5E7EB] bg-white p-4 md:p-8 shadow-[0px_10px_30px_rgba(0,0,0,0.06)] max-h-[640px]">
-     <Heading className="text-[28px] font-semibold text-[#05132B] font-primary ml-[-8px]" as="h2" > Talk to us</Heading>
-      <AnimatedText as="p" delay={0.2} className="text-[var(--color-para)] md:mb-10 mb-4">Reach out directly — our solutions team is ready to help.</AnimatedText>
+    <div className="rounded-xl border-t border-l border-b  border-[#E5E7EB] bg-white p-4 md:p-8 shadow-[0px_10px_30px_rgba(0,0,0,0.06)] max-h-[640px]">
+      <Heading className=" text-xl lg:text-2xl font-semibold text-[#05132B] font-primary" as="h2" >Talk to us</Heading>
+      <AnimatedText as="p" delay={0.2} className="text-para text-base md:mb-10 mb-4">Reach out directly — our solutions team is ready to help.</AnimatedText>
 
       <div className="space-y-4">
-         <ContactCard
+        <ContactCard
           title="Call us"
           icon={
             <Image
@@ -22,7 +22,7 @@ export default function ContactInfo() {
             />
           }
         >
-          (+91)-120-4237934, (+91)-8448120153
+          <a className="cursor-pointer" href="tel:+91-120-4237934">(+91)-120-4237934</a>, <a className="cursor-pointer" href="tel:+91-8448120153">(+91)-8448120153</a>
         </ContactCard>
 
         <ContactCard
@@ -36,7 +36,7 @@ export default function ContactInfo() {
             />
           }
         >
-          sales@yoekisoft.com
+          <a href="mailto:sales@yoekisoft.com"> sales@yoekisoft.com</a>
         </ContactCard>
 
         <ContactCard

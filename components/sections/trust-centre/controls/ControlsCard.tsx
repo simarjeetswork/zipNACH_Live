@@ -7,7 +7,7 @@ interface Props {
 
 export default function ControlsCard({ section }: Props) {
   return (
-    <section id={section.id} className="scroll-mt-28">
+    <div id={section.id} className="scroll-mt-32 ctrl_crd ">
       <h3 className="mb-3 text-xl font-medium text-[#000000CC]">
         {section.title}
       </h3>
@@ -28,12 +28,11 @@ export default function ControlsCard({ section }: Props) {
         {section.controls.map((control, index) => (
           <div
             key={control.title}
-            className={`grid grid-cols-[1fr_80px] px-4 py-4 ${
-              index !== section.controls.length - 1
-            }`}
+            className={`grid grid-cols-[1fr_80px] px-4 py-4 ${index !== section.controls.length - 1
+              }`}
           >
             <div>
-              <h4 className="font-semibold text-[#000000CC] mb-1">
+              <h4 className="font-semibold text-[#000000CC] mb-1 text-base">
                 {control.title}
               </h4>
 
@@ -52,6 +51,6 @@ export default function ControlsCard({ section }: Props) {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

@@ -8,9 +8,9 @@ export default function Hero() {
 
     return (
         <>
-            <section className="mod_hr_x pt-28 pb-15 px-6 relative bx_ptrn overflow-hidden h-dvh flex items-center">
+            <section className="mod_hr_x pt-28 pb-15 px-6 relative bx_ptrn overflow-hidden min-h-dvh flex items-center">
                 <div className="blr_spr absolute -right-4 -top-4 bg-[#3f89ff48] rounded-full blur-3xl z-0 w-[180px] h-[180px]"></div>
-                <div className="container mx-auto ">
+                <div className="container mx-auto">
                     <div className="relative z-1 max-w-[800px]">
                         <AnimatedText as="p" className="text-blue text-start text-xs sm:text-sm uppercase font-mono font-normal bg-chip inline-block px-4 rounded-2xl py-1 mb-7">Zipnach modelS</AnimatedText>
                         <Heading as="h1" className="mb-2 text-3xl sm:text-5xl xl:text-6xl leading-[110%] text-start font-medium font-primary text-heading"><span className="text-primary">Flexible</span> Deployment. <br className=" hidden sm:block" />

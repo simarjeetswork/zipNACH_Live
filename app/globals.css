@@ -11,12 +11,10 @@
 
 }
 
-
 @theme {
   --color-blue: #3F89FF;
   --color-off: #F1F7FF;
   --color-primary: #004ADE;
-  --color-gray: #67758F;
   --color-heading: #032656;
   --color-para: #00000099;
   --border-blue: #3F89FF;
@@ -71,8 +69,8 @@ body {
 
 @utility container {
   margin-inline: auto;
-  /* padding-inline: 0rem; */
-  padding-inline: 0.75rem;
+  padding-inline: 0rem;
+  /* padding-inline: 0.75rem; */
 
   @media (width >=640px) {
     max-width: 640px;

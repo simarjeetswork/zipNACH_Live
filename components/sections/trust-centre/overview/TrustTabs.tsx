@@ -1,7 +1,7 @@
 "use client";
 
-import AnimatedText from "@/lib/gsap/animations/AnimateText";
-import { useState } from "react";
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap/gsap"
+import { useRef, useState } from "react";
 import ComplianceCard from "./ComplianceCard";
 import { complianceData, controlsData } from "./data";
 import ControlCard from "./ControlCard";
@@ -12,13 +12,38 @@ const tabs = ["Overview", "Controls", "Resources"];
 export default function TrustTabs() {
   const [activeTab, setActiveTab] = useState("Overview");
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
-
+  const containerRef = useRef<HTMLDivElement>(null)
+  const controlSecRef = useRef<HTMLDivElement>(null)
   const handleControlClick = (sectionId: string) => {
     setSelectedSection(sectionId);
     setActiveTab("Controls");
   };
+  useGSAP(
+    () => {
+      const box = gsap.utils.selector(containerRef);
+      ScrollTrigger.batch(box(".cmp_bx"), {
+        start: "top 80%",
+        once: true,
+        onEnter: (elements) => {
+          gsap.fromTo(elements, {
+            y: 100,
+            opacity: 0,
+          },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power3.out",
+            });
+        },
+      });
+
+    }, { scope: containerRef, dependencies: [activeTab] }
+  );
+
   return (
-    <section className="py-4 mb-[64px]">
+    <section className="pt-10 pb-20 px-6 relative mb-[64px]" ref={controlSecRef}>
       <div className="container">
         <div className="sticky top-[68px] z-30 border-b border-[#B3B3B3] bg-white">
           <div className="flex gap-10">
@@ -39,32 +64,28 @@ export default function TrustTabs() {
         </div>
         {activeTab === "Overview" && (
           <div className="mt-10 grid gap-10 lg:grid-cols-[295px_1fr]">
-            <div>
-              <AnimatedText
-                as="p"
-                delay={0.2}
+            <div className="">
+              <p
                 className="mb-3 md:mb[24px] leading-[120%] text-xl font-medium text-[#041026] font-primary"
               >
                 Compliance
-              </AnimatedText>
+              </p>
               <ComplianceCard items={complianceData} />
             </div>
             <div>
-              <AnimatedText
-                as="p"
-                delay={0.2}
+              <p
                 className="mb-3 md:mb[24px] leading-[120%] text-xl font-medium text-[#041026] font-primary"
               >
                 Controls
-              </AnimatedText>
-              <div className="grid gap-6 md:grid-cols-2">
+              </p>
+              <div className="grid gap-6 md:grid-cols-2" ref={containerRef}>
                 {controlsData.map((card) => (
                   <ControlCard
                     key={card.title}
                     data={card}
                     onClick={handleControlClick}
                   />
-                ))}  
+                ))}
               </div>
             </div>
           </div>

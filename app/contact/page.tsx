@@ -6,72 +6,76 @@ import Heading from "@/components/ui/Heading";
 import AnimatedText from "@/lib/gsap/animations/AnimateText";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import type { Metadata } from "next";
 import { useRef } from "react";
 
-export const metadata: Metadata = {
-  title: "ZipNach-Contact Us",
-};
+// export const metadata: Metadata = {
+//   title: "ZipNach-Contact Us",
+// };
 export default function Contact() {
   const infoRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+  useGSAP(
 
-  useGSAP(() => {
-    const mm = gsap.matchMedia();
+    () => {
+      const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1280px)", () => {
-      gsap.set(infoRef.current, {
-        x: 220,
-        zIndex: 1,
+      mm.add("(min-width: 1024px)", () => {
+        gsap.set(infoRef.current, {
+          x: 150,
+          zIndex: 1,
+        });
+        gsap.set(formRef.current, {
+          x: -150,
+          zIndex: 1,
+        });
+
+        gsap.set(formRef.current, {
+          zIndex: 2,
+        });
       });
 
-      gsap.set(formRef.current, {
-        zIndex: 2,
-      });
-    });
-
-    return () => mm.revert();
-  });
+      return () => mm.revert();
+    },
+    { scope: contactRef });
   const reveal = () => {
-    if (window.innerWidth < 1280) return;
+    if (window.innerWidth < 1024) return;
 
     gsap.to(infoRef.current, {
+      x: 40,
+      duration: 0.8,
+      ease: "power3.out",
+    });
+    gsap.to(formRef.current, {
       x: 0,
       duration: 0.8,
       ease: "power3.out",
     });
+
   };
   return (
     <>
-      <main className="pt-[80px] pb-[100px]">
-        <div className="container max-w-[1117px]">
-          <div className="mx-auto max-w-[742px] text-center">
-            <span className="inline-flex rounded-full bg-[#3F89FF1A] px-4 py-1 text-[14px] font-normal uppercase text-[#3F89FF] font-primary mb-[20px] md:mb-[40px]">
-              ZIPNACH FOR ENTERPRISE
-            </span>
-            <Heading
-              as="h3"
-              className="mb-0 text-[36px] font-semibold font-primary text-[var(--color-heading)] md:text-[56px] leading-[120%]"
-            >
-              Connect With Our{" "}
-              <span className="text-[var(--color-primary)]">Team</span>
-            </Heading>
+      <section className="pt-28 pb-15 px-6 relative overflow-hidden" ref={contactRef}>
+        <div className="container mx-auto">
+          <div className="text-center">
+            <AnimatedText as="p" className="text-blue text-start text-xs sm:text-sm uppercase font-mono font-normal bg-chip inline-block px-4 rounded-2xl py-1 mb-7">ZIPNACH FOR ENTERPRISE</AnimatedText>
+            <Heading as="h1" className="mb-2 text-3xl sm:text-5xl xl:text-6xl leading-[110%] text-center font-medium font-primary text-heading">Connect With Our<span className="text-primary"> Team.</span></Heading>
             <AnimatedText
               as="p"
               delay={0.2}
-              className="text-[var(--color-para)] mb-[22px] md:mb-[48px]"
+              className="text-para mb-10"
             >
               Whether you're evaluating eNACH, UPI AutoPay, or large-scale
-              recurring collections, our team can help you choose the right
+              recurring collections, our team can <br className="hidden xl:block" /> help you choose the right
               setup and get started quickly.
             </AnimatedText>
           </div>
 
-          <div className="relative grid gap-8 xl:grid-cols-[632px_minmax(0,1fr)] items-center">
+          <div className="relative grid gap-8 justify-center grid-cols-1 lg:grid-cols-[40%_60%] items-center max-w-[1100px] mx-auto ">
             <div
               ref={infoRef}
               onClick={reveal}
-              className="w-full xl:absolute xl:left-[-55px] xl:top-[55px] xl:w-[485px]"
+              className="w-full xl:top-[55px]"
             >
               <ContactInfo />
             </div>
@@ -79,13 +83,13 @@ export default function Contact() {
             <div
               ref={formRef}
               onClick={reveal}
-              className="relative w-full xl:ml-[430px] xl:w-[632px]"
+              className="relative"
             >
               <ContactForm />
             </div>
           </div>
         </div>
-      </main>
+      </section>
     </>
   );
 }

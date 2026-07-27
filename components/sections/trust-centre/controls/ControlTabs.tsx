@@ -75,7 +75,6 @@ export default function ControlsTab({
   sections={controlsData}
   activeSection={activeSection}
 />
-
       <div>
         <ControlsSearch
           value={search}

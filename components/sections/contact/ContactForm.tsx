@@ -1,7 +1,6 @@
 "use client";
 
-import useContactForm from "@/app/hook/useContactForm";
-import Button from "@/components/ui/Button";
+import useContactForm from "@/hooks/useContactForm";
 import Input from "@/components/ui/Input";
 import Textarea from "@/components/ui/Textarea";
 import AnimatedButton from "@/lib/gsap/animations/AnimateButton";
