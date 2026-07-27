@@ -23,6 +23,7 @@
   --color-chip: #3F89FF1A;
   --color-shade: #DFECFF;
   --color-sub: #000000E5;
+  --color-gray: #67758F;
 
   /* Font  */
 
@@ -70,7 +71,8 @@ body {
 
 @utility container {
   margin-inline: auto;
-  padding-inline: 0rem;
+  /* padding-inline: 0rem; */
+  padding-inline: 0.75rem;
 
   @media (width >=640px) {
     max-width: 640px;

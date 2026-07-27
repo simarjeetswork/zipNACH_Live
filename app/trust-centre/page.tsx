@@ -1,4 +1,6 @@
 
+import HeroSection from '@/components/sections/trust-centre/overview/Hero';
+import TrustTabs from '@/components/sections/trust-centre/overview/TrustTabs';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,7 +10,8 @@ export const metadata: Metadata = {
 export default function TrustCentre() {
     return (
         <>
-            <h1>Trust Centre</h1>
+            <HeroSection />
+            <TrustTabs />
         </>
     );
 }

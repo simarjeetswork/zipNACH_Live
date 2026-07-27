@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import PricingModel from "@/components/layout/PricingModel";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -22,7 +23,8 @@ const openSans = Open_Sans({
 
 export const metadata: Metadata = {
   title: "zipNACH",
-  description: "Operational intelligence infrastructure for NACH mandate validation, digitization and automation — built for banks, NBFCs and fintechs.",
+  description:
+    "Operational intelligence infrastructure for NACH mandate validation, digitization and automation — built for banks, NBFCs and fintechs.",
 };
 
 export default function RootLayout({
@@ -31,13 +33,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${geistMono.variable} ${openSans.variable}`}><body>
-      <SmoothScrollProvider>
-        <Header />
-        {children}
-        <Footer />
-      </SmoothScrollProvider>
-    </body>
+    <html
+      lang="en"
+      className={`${geist.variable} ${geistMono.variable} ${openSans.variable}`}
+    >
+      <body>
+        <SmoothScrollProvider>
+          <Header />
+          <div className="pt-[68px]">
+            {children}
+            <PricingModel />
+          </div>
+          <Footer />
+        </SmoothScrollProvider>
+      </body>
     </html>
   );
 }
