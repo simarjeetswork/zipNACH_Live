@@ -19,7 +19,7 @@ export default function Chart() {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[0.5fr_1fr] gap-8 bg-white rounded-xl border border-[#B3B3B3] overflow-hidden">
             {/* Left — Donut chart */}
-            <div className="relative flex items-center justify-center rounded-lg">
+            <div className="relative flex items-center justify-center  bg-[url('/images/factCentre/chartBg.png')] bg-cover bg-center py-15">
                 <PieChart width={300} height={300}>
                     <Pie
                         data={data}
@@ -56,7 +56,7 @@ export default function Chart() {
             </div>
 
             {/* Right — list with bars */}
-            <div>
+            <div className='bg-white py-15 px-10'>
                 <h2 className="text-2xl font-heading text-heading">NACH Rejection Distribution</h2>
                 <p className="text-xs text-gray-400 mt-1">5,000 failed debits analysed in the last 30 days</p>
 
