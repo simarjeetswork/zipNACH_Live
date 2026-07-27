@@ -1,4 +1,3 @@
-import PricingModel from '@/components/layout/PricingModel';
 import Hero from '@/components/sections/models/Hero';
 import Plans from '@/components/sections/models/Plans';
 import Platform from '@/components/sections/models/Platform';
@@ -14,7 +13,6 @@ export default function Models() {
             <Hero />
             <Platform />
             <Plans />
-            <PricingModel />
         </>
     );
 }
