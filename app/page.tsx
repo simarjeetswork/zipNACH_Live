@@ -1,13 +1,14 @@
-import Header from "@/components/layout.jsx/Header";
-import Footer from "@/components/ui/Footer";
-import Hero from "@/components/ui/homepage/Hero";
+import BottomBanner from "@/components/sections/home/BottomBanner";
+import Hero from "@/components/sections/home/Hero";
+import MandateCoverage from "@/components/sections/home/MandateCoverage";
+
 
 export default function Home() {
   return (
     <>
-    <Header />
     <Hero />
-    <Footer />
+    <MandateCoverage />
+    <BottomBanner />
     </>
   );
 }
