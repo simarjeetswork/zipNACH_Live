@@ -11,7 +11,7 @@ export default function PricingModel() {
                 <div className="bx_ptrn absolute w-full h-full inset-0"></div>
                 <div className="container mx-auto">
                     <div className="relative z-2 text-center">
-                        <Heading as="h3" className="mb-3 text-2xl sm:text-4xl xl:text-5xl leading-[110%] text-center font-medium font-primary text-white">Let's find the right Pricing model for<br className="hidden sm:block" /> your operations.</Heading>
+                        <Heading as="h3" className="mb-3 text-2xl sm:text-4xl xl:text-5xl leading-[110%] text-center font-medium font-primary text-white">Let's find the right Pricing model for<br className="hidden sm:block" />your operations.</Heading>
                         <AnimatedText as="p" delay={0.2} className=" text-center w-full text-base leading-[160%] font-normal mb-7 text-white/60">Talk to our team about mandate volumes, integrations, onboarding, and <br /> supported channels.</AnimatedText>
                         <div className="flex gap-4 flex-col sm:flex-row justify-center mt-12">
                             <AnimatedButton variant="primary" className="flex  gap-2 text-base font-semibold text-center justify-center items-center" delay={0.3}>Talk to our solution Team <span> <ArrowUpRight size={18} /> </span></AnimatedButton>

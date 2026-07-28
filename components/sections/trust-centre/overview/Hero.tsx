@@ -24,8 +24,7 @@ export default function HeroSection() {
             className="md:text-5xl text-3xl font-light leading-[100%] text-white lg:text-6xl font-primary mb-2"
             as="h1"
           >
-            Security Commitment
-          </Heading>
+            Security Commitment</Heading>
 
           <div className="space-y-2">
             <AnimatedText

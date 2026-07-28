@@ -1,0 +1,18 @@
+export const stateCoordinates: Record<string, [number, number]> = {
+    'Andhra Pradesh': [79.7400, 15.9129],
+    Bihar: [85.3131, 25.0961],
+    Chhattisgarh: [81.8661, 21.2787],
+    Delhi: [77.1025, 28.7041],
+    Gujarat: [71.1924, 22.2587],
+    Haryana: [76.0856, 29.0588],
+    Karnataka: [75.7139, 15.3173],
+    Kerala: [76.2711, 10.8505],
+    Maharashtra: [75.7139, 19.7515],
+    Odisha: [85.0985, 20.9517],
+    Punjab: [75.3412, 31.1471],
+    Rajasthan: [74.2179, 27.0238],
+    'Tamil Nadu': [78.6569, 11.1271],
+    Telangana: [79.0193, 18.1124],
+    'Uttar Pradesh': [80.9462, 26.8467],
+    'West Bengal': [87.8550, 22.9868],
+};

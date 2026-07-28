@@ -12,7 +12,7 @@ export default function HeroFact() {
                 <div className="container mx-auto">
                     <div className="relative z-1 w-full text-center">
                         <AnimatedText as="p" className="text-blue text-xs sm:text-sm uppercase font-mono font-normal bg-chip inline-block px-4 rounded-2xl py-1 mb-7">Fact Centre</AnimatedText>
-                        <Heading as="h1" className="mb-2 text-3xl sm:text-5xl xl:text-6xl leading-[110%] text-center font-medium font-primary text-heading">Trusted by Enterprises <br className="block" /><span className="text-primary">Proven by Numbers.</span></Heading>
+                        <Heading as="h1" className="mb-2 text-3xl sm:text-5xl xl:text-6xl leading-[110%] text-center font-medium font-primary text-heading">Trusted by Enterprises<br className="block" /><span className="text-primary">Proven by Numbers.</span></Heading>
                         <AnimatedText as="p" delay={0.2} className="text-para text-center text-base leading-[160%] font-normal mb-7">Trusted by banks, NBFCs, enterprises, and fintechs to simplify secure <br className="hidden sm:block" /> mandate management and collections.</AnimatedText>
                         <div className="flex gap-4 flex-col justify-center sm:flex-row mt-10 sm:mt-10">
                             <AnimatedButton variant="primary" className="flex gap-2 text-base font-semibold text-center justify-center items-center" delay={0.3}>Explore the Facts <span> <ArrowUpRight size={18} /> </span></AnimatedButton>

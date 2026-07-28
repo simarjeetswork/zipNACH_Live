@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GridBackground from "../ui/GridBackground";
 import { once } from "events";
+import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,8 +37,8 @@ export default function Footer() {
           scrollTrigger: {
             trigger: footerRef.current,
             start: "top 70%",
-            end: "bottom 20%",
-            scrub: 1
+            end: "bottom 80%",
+            scrub: 1,
           }
         });
     },
@@ -71,6 +72,7 @@ export default function Footer() {
                   alt="Email"
                   width={19}
                   height={15}
+
                 />
                 <Link
                   href="mailto:sales@yoekisoft.com"
@@ -150,13 +152,13 @@ export default function Footer() {
         </div>
 
         <div
-          className="relative mt-16 flex justify-center pb-1"
+          className="relative mt-16 flex justify-center pb-1" ref={footerImgRef}
         >
           <Image
             src="/images/zipnach.png"
             alt="ZipNACH"
             width={802}
-            ref={footerImgRef}
+
             height={288}
           />
         </div>

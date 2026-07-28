@@ -1,114 +1,188 @@
-// components/sections/banks/BanksMap.tsx
 'use client';
-import { useState } from 'react';
-import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
-import { MapPin } from 'lucide-react';
 
-const INDIA_TOPOJSON = 'https://gist.githubusercontent.com/jbrobst/56c13bbbf9d97d187fea01ca62ea5112/raw/e388c4cae20aa53cb5090210a42ebb9b765c0a36/india_states.geojson';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { clientsByState } from '@/components/sections/factCentre/data';
+import { useGSAP, ScrollTrigger, gsap } from '@/lib/gsap/gsap';
 
-export default function BanksMap() {
-    // data/state-coordinates.ts
-    const stateCoordinates: Record<string, [number, number]> = {
-        Maharashtra: [75.7139, 19.7515],
-        Karnataka: [75.7139, 15.3173],
-        'Uttar Pradesh': [80.9462, 26.8467],
-        'Tamil Nadu': [78.6569, 11.1271],
-        Gujarat: [71.1924, 22.2587],
-        Rajasthan: [74.2179, 27.0238],
-        'West Bengal': [87.8550, 22.9868],
-        'Madhya Pradesh': [78.6569, 22.9734],
-        Delhi: [77.1025, 28.7041],
-        Punjab: [75.3412, 31.1471],
-        // add remaining states matching your banksByState keys
-    };
-    // data/banks-by-state.ts
-    const banksByState: Record<string, string[]> = {
-        Maharashtra: ['Bank of Maharashtra', 'IDBI Bank', 'Bank of India'],
-        Karnataka: ['Canara Bank', 'Vijaya Bank'],
-        'Uttar Pradesh': ['Punjab National Bank', 'Allahabad Bank'],
-        // ...fill in your ~100 banks grouped by their state
-    };
-    const [hoveredState, setHoveredState] = useState<string | null>(null);
-    const [clickedState, setClickedState] = useState<string | null>(null);
-    const activeState = clickedState ?? hoveredState;
+const stateCoordinates: Record<string, { x: number; y: number }> = {
+    'Andhra Pradesh': { x: 40, y: 75 },
+    Bihar: { x: 63, y: 40 },
+    Chhattisgarh: { x: 56, y: 50 },
+    Delhi: { x: 40, y: 28 },
+    Gujarat: { x: 15, y: 50 },
+    Haryana: { x: 31, y: 30 },
+    Karnataka: { x: 26, y: 75 },
+    Kerala: { x: 30, y: 92 },
+    Maharashtra: { x: 36, y: 58 },
+    Odisha: { x: 60, y: 58 },
+    Punjab: { x: 28, y: 20 },
+    Rajasthan: { x: 25, y: 40 },
+    'Tamil Nadu': { x: 37, y: 93 },
+    Telangana: { x: 50, y: 63 },
+    'Uttar Pradesh': { x: 48, y: 35 },
+    'West Bengal': { x: 65, y: 47 },
+};
 
+type TooltipType = {
+    left: string;
+    top: string;
+    state: string;
+    client: string;
+};
+
+export default function ClientsMap() {
+    const [tooltip, setTooltip] = useState<TooltipType | null>(null);
+    useEffect(() => {
+        const close = () => setTooltip(null);
+        window.addEventListener('click', close);
+        return () => window.removeEventListener('click', close);
+    }, []);
+    const mapRef = useRef<HTMLDivElement>(null)
+    useGSAP(() => {
+        const mm = gsap.matchMedia();
+
+        mm.add("(min-width: 780px)", () => {
+            if (!mapRef.current) return
+            gsap.fromTo(
+                mapRef.current,
+                {
+                    x: 350,
+                    y: -350,
+                    scale: 0.9,
+                },
+                {
+                    x: 0,
+                    y: 0,
+                    rotate: 0,
+                    scale: 1,
+                    duration: 1.5,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: mapRef.current,
+                        start: "top 30%",
+                    },
+                }
+            );
+        })
+    }
+    ), { scope: mapRef, dependencies: [] }
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8">
-            <div className="border rounded-lg overflow-hidden relative">
-                <ComposableMap projection="geoMercator" projectionConfig={{ scale: 1000, center: [80, 22] }}>
-                    <Geographies geography={INDIA_TOPOJSON}>
-                        {({ geographies }) =>
-                            geographies.map((geo) => (
-                                <Geography
-                                    key={geo.rsmKey}
-                                    geography={geo}
-                                    style={{
-                                        default: { fill: '#E5E7EB', outline: 'none', stroke: '#fff', strokeWidth: 0.5 },
-                                        hover: { fill: '#E5E7EB', outline: 'none' },
-                                        pressed: { fill: '#E5E7EB', outline: 'none' },
-                                    }}
-                                />
-                            ))
-                        }
-                    </Geographies>
+        <div className="flex justify-end overflow-hidden">
+            <div className="relative w-[700px] aspect-square" ref={mapRef}>
+                {/* Map */}
+                <Image
+                    src="/images/factCentre/mapSvg.svg"
+                    alt="India Map"
+                    preload
+                    fill
+                    className="object-contain"
+                />
 
-                    {/* Pins — only for states with bank data */}
-                    {Object.entries(stateCoordinates).map(([stateName, coords]) => {
-                        if (!banksByState[stateName]) return null;
-                        const isActive = activeState === stateName;
+                {/* Pins */}
+                {Object.entries(clientsByState).flatMap(([state, clients]) => {
+                    const point = stateCoordinates[state];
+
+                    if (!point) return [];
+
+                    return clients.map((client, index) => {
+                        const spread = 80;
+
+                        const angle = (index * 137.5) * (Math.PI / 180);
+                        const radius = Math.min(Math.sqrt(index) * 8, spread);
+
+                        const offsetX = Math.cos(angle) * radius;
+                        const offsetY = Math.sin(angle) * radius;
+
+                        const left = `calc(${point.x}% + ${offsetX}px)`;
+                        const top = `calc(${point.y}% + ${offsetY}px)`;
+
 
                         return (
-                            <Marker
-                                key={stateName}
-                                coordinates={coords}
-                                onMouseEnter={() => setHoveredState(stateName)}
-                                onMouseLeave={() => setHoveredState(null)}
-                                onClick={() => setClickedState((prev) => (prev === stateName ? null : stateName))}
-                                style={{ default: { cursor: 'pointer' } }}
+                            <div
+                                key={`${state}-${client}`}
+                                className="absolute cursor-pointer"
+                                style={{
+                                    left,
+                                    top,
+                                    transform: 'translate(-50%, -100%)',
+                                }}
+                                onMouseEnter={() =>
+                                    setTooltip({
+                                        left,
+                                        top,
+                                        state,
+                                        client,
+                                    })
+                                }
+                                onMouseLeave={() => setTooltip(null)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+
+                                    setTooltip({
+                                        left,
+                                        top,
+                                        state,
+                                        client,
+                                    });
+                                }}
                             >
-                                <g transform="translate(-12, -24)">
-                                    <MapPin
-                                        size={24}
-                                        fill={isActive ? '#004ADE' : '#3F89FF'}
-                                        stroke="#fff"
-                                        strokeWidth={1}
+                                <div className="relative h-[10] w-[10] sm:w-[15px] sm:h-[15px] hover:scale-110 transition-transform">
+                                    <Image
+                                        src="/images/factCentre/pin.svg"
+                                        alt="Pin"
+                                        fill
+                                        className="object-contain"
                                     />
-                                </g>
-
-                                {/* Tooltip — only shown when this specific marker is hovered/active */}
-                                {isActive && (
-                                    <text
-                                        textAnchor="middle"
-                                        y={-32}
-                                        style={{
-                                            fontFamily: 'inherit',
-                                            fontSize: '11px',
-                                            fontWeight: 600,
-                                            fill: '#032656',
-                                        }}
-                                    >
-                                        {stateName}
-                                    </text>
-                                )}
-                            </Marker>
+                                </div>
+                            </div>
                         );
-                    })}
-                </ComposableMap>
-            </div>
+                    });
+                })}
 
-            {/* Side panel — same as before */}
-            <div className="bg-off rounded-lg p-6">
-                {activeState ? (
-                    <>
-                        <h3 className="font-heading text-lg text-heading">{activeState}</h3>
-                        <ul className="mt-3 space-y-2 text-sm text-gray-600">
-                            {banksByState[activeState].map((bank) => (
-                                <li key={bank}>{bank}</li>
-                            ))}
-                        </ul>
-                    </>
-                ) : (
-                    <p className="text-sm text-gray-400">Hover or tap a pin to see partner banks</p>
+                {/* Desktop */}
+                {tooltip && (
+                    <div className="hidden md:block">
+                        <div
+                            className="absolute z-[50] pointer-events-none"
+                            style={{
+                                left: tooltip.left,
+                                top: tooltip.top,
+                                transform: "translate(-50%, calc(-100% - 20px))",
+                            }}
+                        >
+                            <div className="rounded-lg bg-gray-800 px-3 py-2 text-xs text-white shadow-xl whitespace-nowrap">
+                                <p>{tooltip.client}</p>
+
+                                <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-gray-800" />
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {/* Mobile */}
+                {tooltip && (
+                    <div className="absolute inset-0 left-0 right-0 z-[100] flex items-center justify-center md:hidden">
+                        {/* Background */}
+                        <div
+                            className="absolute inset-0"
+                            onClick={() => setTooltip(null)}
+                        />
+
+                        {/* Card */}
+                        <div className="relative z-10 mx-6 w-full max-w-sm rounded-xl bg-white p-5 shadow-2xl">
+
+                            <p className="mt-2 text-sm text-gray-600">
+                                {tooltip.client}
+                            </p>
+
+                            <button
+                                onClick={() => setTooltip(null)}
+                                className="mt-5 w-full rounded-lg bg-gray-900 py-2 text-white"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
                 )}
             </div>
         </div>

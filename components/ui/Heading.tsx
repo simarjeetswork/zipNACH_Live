@@ -13,14 +13,10 @@ function splitText(node: ReactNode): ReactNode {
     // Text node
     if (typeof node === "string") {
         return node.split(" ").map((word, i, arr) => (
-            <span
-                key={i}
-                className="word inline-block overflow-hidden"
-            >
-                <span className="inline-block">
+            <span key={i} className="word inline-block overflow-hidden">
+                <span className="inline-block mr-[0.25em]">
                     {word}
                 </span>
-                {i !== arr.length - 1 && "\u00A0"}
             </span>
         ));
     }
@@ -31,7 +27,6 @@ function splitText(node: ReactNode): ReactNode {
             children: Children.map(node.props.children, splitText),
         });
     }
-
     return node;
 }
 

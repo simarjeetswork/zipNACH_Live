@@ -59,7 +59,7 @@ export default function Contact() {
         <div className="container mx-auto">
           <div className="text-center">
             <AnimatedText as="p" className="text-blue text-start text-xs sm:text-sm uppercase font-mono font-normal bg-chip inline-block px-4 rounded-2xl py-1 mb-7">ZIPNACH FOR ENTERPRISE</AnimatedText>
-            <Heading as="h1" className="mb-2 text-3xl sm:text-5xl xl:text-6xl leading-[110%] text-center font-medium font-primary text-heading">Connect With Our<span className="text-primary"> Team.</span></Heading>
+            <Heading as="h1" className="mb-2 text-3xl sm:text-5xl xl:text-6xl leading-[110%] text-center font-medium font-primary text-heading">Connect With Our<span className="text-primary">Team.</span></Heading>
             <AnimatedText
               as="p"
               delay={0.2}

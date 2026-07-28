@@ -68,7 +68,7 @@ export default function Platform() {
                 <div className="container mx-auto ">
                     <div className="relative z-1">
                         <AnimatedText as="p" className="text-blue text-start text-xs sm:text-sm uppercase font-mono font-normal bg-chip inline-block px-4 rounded-2xl py-1 mb-5">Deployment Models</AnimatedText>
-                        <Heading as="h2" className=" text-2xl sm:text-4xl xl:text-5xl leading-[110%] text-start font-light font-primary text-heading mb-10">One platform. <br />
+                        <Heading as="h2" className=" text-2xl sm:text-4xl xl:text-5xl leading-[110%] text-start font-light font-primary text-heading mb-10">One platform.<br />
                             <span className="text-primary font-medium">Three operating models.</span></Heading>
                         <div className=" grid grid-cols-1 lg:grid-cols-3 gap-5">
                             {plans.map((plan, index) => (
