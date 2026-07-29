@@ -6,15 +6,14 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GridBackground from "../ui/GridBackground";
-import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "ZipNACH Models", href: "/models" },
-  { name: "Trust Centre", href: "/trust-centre" },
   { name: "Fact Centre", href: "/fact-centre" },
+  { name: "Trust Centre", href: "/trust-centre" },
 ];
 
 
