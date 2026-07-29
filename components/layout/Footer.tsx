@@ -37,7 +37,7 @@ export default function Footer() {
           end: "bottom 80%",
           scrub: 1,
           invalidateOnRefresh: true,
-          markers: true
+          // markers: true
         },
       }
     );
