@@ -10,7 +10,7 @@ export default function HeroSection() {
         src="/images/trust-hero-bg.png"
         alt=""
         fill
-        priority
+        preload
         className="z-1 object-cover"
       />
 

@@ -6,8 +6,6 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GridBackground from "../ui/GridBackground";
-import { once } from "events";
-import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,6 +37,7 @@ export default function Footer() {
             start: "top 70%",
             end: "bottom 80%",
             scrub: 1,
+            markers: true,
           }
         });
     },

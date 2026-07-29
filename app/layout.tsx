@@ -4,8 +4,6 @@ import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import ScrollTriggerRefresh from "@/components/ScrollTriggerRefresh";
-import { ScrollTrigger } from "gsap/all";
 const geist = Geist({
   variable: "--font-geist",
   subsets: ["latin"],
@@ -38,7 +36,6 @@ export default function RootLayout({
     >
       <body>
         <SmoothScrollProvider>
-          <ScrollTriggerRefresh />
           <Header />
           <div className="">
             {children}

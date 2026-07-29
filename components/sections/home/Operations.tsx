@@ -5,6 +5,7 @@ import AnimatedText from "@/lib/gsap/animations/AnimateText";
 import Image from "next/image";
 import { useGSAP, gsap, ScrollTrigger } from "@/lib/gsap/gsap";
 import { useRef } from "react";
+import NetworkDiagram from "./Networkdiagram";
 
 export default function Operations() {
 
@@ -25,68 +26,68 @@ export default function Operations() {
     ]
     const containerRef = useRef<HTMLDivElement>(null)
     const chipRef = useRef<HTMLDivElement[]>([])
+    const mainImageRef = useRef<HTMLDivElement>(null)
+    const networkDiagramRef = useRef<HTMLDivElement>(null)
 
     useGSAP(() => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top top",
-                end: `+=${data.length * 700}`,
+                end: `+=${data.length * 120}`,
                 pin: containerRef.current,
                 scrub: 1,
                 invalidateOnRefresh: true,
             },
         });
         data.forEach((i, index) => {
-            gsap.set(chipRef.current[index], {
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top top",
-                    end: "bottom bottom",
-                    invalidateOnRefresh: true,
-                }
-            })
+            tl.fromTo(
+                chipRef.current[index],
+                { opacity: 1 },
+                {
+                    opacity: 0, left: "50%",
+                    top: "50%",
+                    xPercent: -50,
+                    yPercent: -50,
+                    ease: "power2.out",
+                }, "0"
+            )
         })
-        // data.forEach((i, index) => {
-        //     tl.fromTo(
-        //         chipRef.current[index],
-        //         { opacity: 1 },
-        //         {
-        //             opacity: 0, left: "50%",
-        //             top: "50%",
-        //             xPercent: -50,
-        //             yPercent: -50,
-        //             ease: "power2.out",
-        //         }
-        //     )
-        // });
+
+        tl.fromTo(mainImageRef.current, { opacity: 0 }, { opacity: 1 })
+        tl.fromTo(networkDiagramRef.current, { opacity: 0 }, { opacity: 1 })
     },
     ), { scope: containerRef };
 
 
     return (
         <>
-            <section className="home_opr pt-10 pb-15 px-6 relative bx_ptrn overflow-hidden min-h-dvh flex items-start" ref={containerRef}>
+            <section className="home_opr pt-10 pb-15 px-6 relative bx_ptrn overflow-hidden flex items-start" ref={containerRef}>
                 <div className="container mx-auto">
                     <div className="relative z-1 text-center">
                         <AnimatedText as="p" className="text-blue text-center text-xs sm:text-sm uppercase font-mono font-normal bg-chip inline-block px-4 rounded-2xl py-1 mb-5">The transformation</AnimatedText>
                         <Heading as="h2" className=" text-2xl sm:text-4xl xl:text-5xl leading-[110%] text-center font-light font-primary text-heading mb-10">From fragmented workflows to <br />
                             <span className="text-primary font-medium">connected operations.</span></Heading>
                     </div>
-                    <div className="anm_scr w-full bg-white relative flex-1 min-h-[60vh]">
+                    <div className="anm_scr w-full bg-white relative flex-1 min-h-[65vh]">
                         {
                             data.map((item, i) => {
                                 return (
-                                    <div key={item.id} ref={(el) => { if (el) chipRef.current[i] = el; }} className="oper_chips inline-flex opacity-0 gap-2 items-center justify-between absolute border rounded-lg shadow-xl bg-white px-1 py-1 border-[#b3b3b37e] " style={{ left: `${item.x}%`, top: `${item.y}%`, transform: "translate(-0%, -0%)" }}>
-                                        <div className=" flex items-center justify-center w-[30px] h-[30px]">
-                                            <Image src={item.icon} alt={item.label} width={40} height={40} objectFit="contain" />
+                                    <div key={item.id} ref={(el) => { if (el) chipRef.current[i] = el; }} className="oper_chips inline-flex gap-2 items-center justify-between absolute border rounded-lg shadow-xl bg-white px-1 py-1 border-[#b3b3b37e] w-[80px] sm:w-[20%] lg:w-auto" style={{ left: `${item.x}%`, top: `${item.y}%`, transform: "translate(-0%, -0%)" }}>
+                                        <div className=" flex items-center justify-center w-[25px] h-[25px] lg:w-[30px] lg:h-[30px] shrink-0 hidden md:block">
+                                            <Image src={item.icon} alt={item.label} width={40} height={40} className="object-contain" />
                                         </div>
-                                        <p className="text-sm text-start text-[#383838] font-medium pe-3">{item.label}</p>
+                                        <p className="text-[9px] sm:text-[10px] lg:text-sm text-center text-[#383838] font-medium md:pe-3">{item.label}</p>
                                     </div>
                                 )
                             })
                         }
+                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 flex items-center justify-center -translate-y-1/2 bg-red w-[100px] h-[100px] sm:w-[180px] smh-[180px] z-[50] opacity-0" ref={mainImageRef}>
+                            <Image src={operationImages.zipSvg} alt="main" width={150} height={150} className="object-contain" />
+                        </div>
+                        <div ref={networkDiagramRef} className="opacity-0">
+                            <NetworkDiagram />
+                        </div>
                     </div>
                 </div>
             </section>

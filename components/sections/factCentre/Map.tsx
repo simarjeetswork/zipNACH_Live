@@ -33,11 +33,20 @@ type TooltipType = {
 
 export default function ClientsMap() {
     const [tooltip, setTooltip] = useState<TooltipType | null>(null);
+    const [canHover, setCanHover] = useState(false);
+
     useEffect(() => {
-        const close = () => setTooltip(null);
-        window.addEventListener('click', close);
-        return () => window.removeEventListener('click', close);
+        const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
+        setCanHover(mq.matches);
+        const handler = (e: MediaQueryListEvent) => setCanHover(e.matches);
+        mq.addEventListener('change', handler);
+        return () => mq.removeEventListener('change', handler);
     }, []);
+    // useEffect(() => {
+    //     const close = () => setTooltip(null);
+    //     window.addEventListener('click', close);
+    //     return () => window.removeEventListener('click', close);
+    // }, []);
     const mapRef = useRef<HTMLDivElement>(null)
     useGSAP(() => {
         const mm = gsap.matchMedia();
@@ -107,24 +116,14 @@ export default function ClientsMap() {
                                     top,
                                     transform: 'translate(-50%, -100%)',
                                 }}
-                                onMouseEnter={() =>
-                                    setTooltip({
-                                        left,
-                                        top,
-                                        state,
-                                        client,
-                                    })
-                                }
-                                onMouseLeave={() => setTooltip(null)}
+                                onMouseEnter={canHover ? () => setTooltip({ left, top, state, client }) : undefined}
+                                onMouseLeave={canHover ? () => setTooltip(null) : undefined}
                                 onClick={(e) => {
                                     e.stopPropagation();
-
-                                    setTooltip({
-                                        left,
-                                        top,
-                                        state,
-                                        client,
-                                    });
+                                    if (canHover) return; // desktop already handled by hover
+                                    setTooltip((prev) =>
+                                        prev?.state === state && prev?.client === client ? null : { left, top, state, client }
+                                    );
                                 }}
                             >
                                 <div className="relative h-[10] w-[10] sm:w-[15px] sm:h-[15px] hover:scale-110 transition-transform">
@@ -144,7 +143,7 @@ export default function ClientsMap() {
                 {tooltip && (
                     <div className="hidden md:block">
                         <div
-                            className="absolute z-[50] pointer-events-none"
+                            className="absolute z-[50]  events-none"
                             style={{
                                 left: tooltip.left,
                                 top: tooltip.top,
