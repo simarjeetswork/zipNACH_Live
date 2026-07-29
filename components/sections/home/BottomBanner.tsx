@@ -6,7 +6,7 @@ import Heading from "@/components/ui/Heading";
 export default function BottomBanner() {
     return (
         <>
-            <section className="prc_md bg-[url('/images/pricing_bg.webp')] bg-cover bg-no-repeat bg-center py-12 md:py-25 px-6 relative">
+            <section className="prc_md bg-[url('/images/pricing_bg.webp')] bg-cover bg-no-repeat bg-center py-12 md:py-25 px-6 relative lg:mt-4">
                 <div className="container mx-auto">
                     <div className="relative z-2 text-center">
                         <Heading as="h3" className="mb-3 text-2xl leading-[110%] text-center font-medium font-primary text-white md:text-[46px]">Powering Smarter <br /><span className="text-[#3F89FF]">Collection Operationss</span> </Heading>

@@ -82,6 +82,7 @@ export default function Operations() {
                                 )
                             })
                         }
+
                         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 flex items-center justify-center -translate-y-1/2 bg-red w-[100px] h-[100px] sm:w-[180px] smh-[180px] z-[50] opacity-0" ref={mainImageRef}>
                             <Image src={operationImages.zipSvg} alt="main" width={150} height={150} className="object-contain" />
                         </div>

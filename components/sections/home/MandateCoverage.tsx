@@ -50,10 +50,13 @@ export default function MandateCoverage() {
   gsap.registerPlugin(ScrollTrigger);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   useGSAP(() => {
+    if (window.innerWidth < 1540) return;
+
     const xOffsets = [-30, -10, 10, 30];
 
     cardsRef.current.forEach((card, index) => {
       if (!card) return;
+
       gsap.to(card, {
         x: xOffsets[index],
         rotation: 0,
@@ -62,15 +65,15 @@ export default function MandateCoverage() {
         ease: "power3.out",
         scrollTrigger: {
           trigger: card,
-          start: "top 40%",
+          start: "top 60%",
           toggleActions: "play none none reverse",
+          invalidateOnRefresh: true
         },
       });
     });
-  });
-
+  }, []);
   return (
-    <section className="pt-[80px] mb-1">
+    <section className="pt-[80px] mb-1 px-3">
       <div className="container">
         <div className="relative overflow-hidden rounded-2xl border border-[#3F89FF33] bg-white">
           {/* Grid Background */}
@@ -85,22 +88,21 @@ export default function MandateCoverage() {
             }}
           />
           <div className="relative z-8 px-6 pt-14">
-            {/* Heading */}
             <div className="text-center mb-[48px]">
               <Chip label="Mandate Coverage" />
               <Heading
                 as="h3"
-                className="mt-6 text-[40px] font-light leading-[140%] text-[#052B63]"
+                className="mt-6 text-[40px] font-light leading-[120%] text-[#052B63]"
               >
-                One platform for every
-                <br />
+                One platform for every {" "}
+                <br className="hidden lg:block" />
                 <span className="font-semibold text-[#004ADE]">
                   mandate workflow.
                 </span>
               </Heading>
             </div>
 
-            <div className="flex items-end justify-center gap-0 overflow-hidden">
+            <div className="hidden 3xl:flex items-end justify-center gap-0 overflow-hidden">
               {mandateCards.map((card, index) => (
                 <div
                   key={card.title}
@@ -130,6 +132,35 @@ export default function MandateCoverage() {
                 </div>
               ))}
             </div>
+
+            <div className="flex flex-wrap items-end justify-center gap-4 py-2 3xl:hidden">
+              {mandateCards.map((card) => (
+                <div
+                  key={card.title}
+                  className={`relative h-[520px] w-[318px] rounded-t-xl border border-[#E6ECF8] bg-[#ECEFFD] px-8 pt-6 shadow-[2px_2px_12px_0px_rgba(0,0,0,0.10)]`}
+                >
+                  <p className="mb-4 text-[10px] font-mono font-regular uppercase tracking-[0.18em] uppercase text-[#032656]">
+                    {card.tag}
+                  </p>
+                  <h3 className="text-[20px] font-primary text-[#383838] mb-4">
+                    {card.title}
+                  </h3>
+                  <p className="text-[15px] leading-7 text-[#67758F]">
+                    {card.description}
+                  </p>
+                  <div>
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      width={300}
+                      height={220}
+                      className="mx-auto w-full object-contain"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </div>

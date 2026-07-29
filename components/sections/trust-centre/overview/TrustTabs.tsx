@@ -38,7 +38,7 @@ export default function TrustTabs() {
             });
         },
       });
-
+      ScrollTrigger.refresh();
     }, { scope: containerRef, dependencies: [activeTab] }
   );
 

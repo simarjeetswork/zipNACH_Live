@@ -32,9 +32,7 @@ export default function SmoothScrollProvider({
 
         lenisRef.current = lenisInstance;
         setLenis(lenisInstance); // triggers re-render -> context updates
-
         lenisInstance.on('scroll', ScrollTrigger.update);
-
         const tickerCallback = (time: number) => {
             lenisInstance.raf(time * 1000);
         };
@@ -46,15 +44,15 @@ export default function SmoothScrollProvider({
             lenisInstance.destroy();
             lenisRef.current = null;
             setLenis(null);
-            // ScrollTrigger.killAll(); 
+            ScrollTrigger.killAll();
         };
     }, []);
 
     useEffect(() => {
+
         const currentLenis = lenisRef.current;
         if (!currentLenis) return;
         currentLenis.scrollTo(0, { immediate: true });
-        console.log(pathname)
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 // guard: instance may have been torn down between the rAFs (e.g. fast nav/unmount)

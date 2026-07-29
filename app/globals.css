@@ -22,7 +22,7 @@
   --color-shade: #DFECFF;
   --color-sub: #000000E5;
   --color-gray: #67758F;
-
+  --breakpoint-3xl: 1540px;
   /* Font  */
 
   --text-xs: 0.75rem;

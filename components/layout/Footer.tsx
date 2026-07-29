@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GridBackground from "../ui/GridBackground";
+import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,30 +21,28 @@ const navLinks = [
 export default function Footer() {
   const footerImgRef = useRef<HTMLImageElement>(null)
   const footerRef = useRef<HTMLDivElement>(null)
-  useGSAP(
-    () => {
-      gsap.fromTo(footerImgRef.current, {
-        y: 200,
-        opacity: 0,
-      },
-        {
-          y: 0,
-          opacity: 1,
-          delay: 0.7,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: "top 70%",
-            end: "bottom 80%",
-            scrub: 1,
-            markers: true,
-          }
-        });
-    },
-
-  ), { scope: footerRef, dependencies: [] }
-
+  useGSAP(() => {
+    gsap.fromTo(
+      footerImgRef.current,
+      { y: 200, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        delay: 0.7,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 70%",
+          end: "bottom 80%",
+          scrub: 1,
+          invalidateOnRefresh: true,
+          markers: true
+        },
+      }
+    );
+  }, { scope: footerRef, dependencies: [] });
+  ScrollTrigger.refresh()
   return (
     <footer className="relative overflow-hidden px-6 pt-15" ref={footerRef}>
       {/* Background */}

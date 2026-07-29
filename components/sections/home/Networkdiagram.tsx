@@ -2,7 +2,7 @@
 
 const nodes = [
     {
-        label: "Account Data",
+        label: "Digital Workflow",
         x: 50,
         y: 14,
         lineX: 50,
@@ -11,7 +11,7 @@ const nodes = [
         opacity: 1,
     },
     {
-        label: "IFSC Data",
+        label: "Single \n Integration",
         x: 90.8465,
         y: 38.8754,
         lineX: 86.9444,
@@ -20,7 +20,7 @@ const nodes = [
         opacity: 1,
     },
     {
-        label: "Mandate Form",
+        label: "Automated \n Collections",
         x: 75.8626,
         y: 79.1246,
         lineX: 74.687,
@@ -29,7 +29,7 @@ const nodes = [
         opacity: 1,
     },
     {
-        label: "Bank Validation",
+        label: "Paperless \n Registration",
         x: 24.1374,
         y: 79.1246,
         lineX: 25.313,
@@ -38,7 +38,7 @@ const nodes = [
         opacity: 1,
     },
     {
-        label: "Approval \n Workflow",
+        label: "Higher \n Success Rate",
         x: 9.1535,
         y: 38.8754,
         lineX: 15.0556,
