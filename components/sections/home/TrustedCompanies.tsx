@@ -6,18 +6,18 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import CurveBackground from "./CurveBackground";
 import AnimatedText from "@/lib/gsap/animations/AnimateText";
+import AnimatedButton from "@/lib/gsap/animations/AnimateButton";
 
-const logos = [
-    "/images/companies/trusted-companies-logo1.png",
-    "/images/companies/trusted-companies-logo2.png",
-    "/images/companies/trusted-companies-logo3.png",
-    "/images/companies/trusted-companies-logo4.png",
-    "/images/companies/trusted-companies-logo5.png",
-    "/images/companies/trusted-companies-logo6.png",
-    "/images/companies/trusted-companies-logo7.png",
-    "/images/companies/trusted-companies-logo8.png",
-    "/images/companies/trusted-companies-logo9.png",
-    "/images/companies/trusted-companies-logo10.png"
+const companies = [
+    "IDFC FIRST BANK ",
+    "HERO FINCORP",
+    "KOTAK MAHINDRA BANK",
+    "FINOVA CAPITAL",
+    "KOGTA FINANCIAL INDIA",
+    "ADANI CAPITAL",
+    "BERAR FINANCE",
+    "MONEYBOXX FINANCE",
+    "ORIX AUTO INFRASTRUCTURE SERVICES"
 ];
 
 export default function TrustedCompanies() {
@@ -40,30 +40,38 @@ export default function TrustedCompanies() {
                     delay={0.2}
                     className="md-4 md:mb-[28px] text-center font-mono uppercase text-sm text-[#05132B]"
                 >
-                    Trusted by 170+ Companies
+                    Trusted by 650+ Companies
                 </AnimatedText>
 
                 <div className="overflow-hidden">
                     <div
                         ref={marqueeRef}
-                        className="flex w-max items-center gap-16 md:gap-24 py-6"
+                        className="flex w-max items-center gap-4 md:gap-16 py-6"
                     >
-                        {[...logos, ...logos].map((logo, index) => (
+                        {[...companies, ...companies].map((company, index) => (
                             <div
                                 key={index}
-                                className="relative h-20 w-[78px] shrink-0 md:h-10 md:w-[78px]"
+                                className="
+                shrink-0
+                rounded-xl
+                border border-[#E5EEF9]
+                bg-white
+                px-6
+                py-3
+                shadow-sm
+              "
                             >
-                                <Image
-                                    src={logo}
-                                    alt=""
-                                    fill
-                                    className="object-contain opacity-60 grayscale"
-                                />
+                                <span className="font-mono text-[15px] text-[#3F89FF] whitespace-nowrap">
+                                    {company}
+                                </span>
                             </div>
                         ))}
                     </div>
-
                 </div>
+                <div className="flex items-center justify-center md:mt-3">
+                    <AnimatedButton className=" text-base font-semibold text-center" delay={0.3}>View all</AnimatedButton>
+                </div>
+
             </div>
 
             <CurveBackground />

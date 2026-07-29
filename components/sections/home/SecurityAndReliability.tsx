@@ -14,12 +14,12 @@ const securityCards = [
         image: "/images/security-reliability-img1.png",
         title: "Role-Based Access Control",
         description:
-            "Control user access with configurable roles and permissions. ",
+            "Control user access with configurable roles and permissions.  ",
     },
     {
         id: "availability",
         image: "/images/security-reliability-img2.png",
-        title: "99.97% High Availability",
+        title: " 99.97% High Availability",
         description:
             "Ensure uninterrupted operations with enterprise-grade uptime.",
     },
@@ -33,21 +33,21 @@ const securityCards = [
     {
         id: "monitoring",
         image: "/images/security-reliability-img4.png",
-        title: "Enterprise Security",
+        title: "Centralized Administration",
         description: "Manage users, entities, and operations centrally.",
     },
     {
         id: "compliance",
         image: "/images/security-reliability-img5.png",
-        title: "Enterprise Security",
+        title: "Flexible Deployment Models",
         description:
-            "Deploy on Cloud, Private Cloud, or On-Premise infrastructure with the flexibility to scale as transaction volumes grow. ",
+            "Deploy on Cloud, Private Cloud, or On-Premise infrastructure with the flexibility to scale as transaction volumes grow.  ",
     },
     {
         id: "governance",
         image: "/images/security-reliability-img6.png",
-        title: "Enterprise Security",
-        description: "Maintain complete audit trails and regulatory compliance. ",
+        title: "Compliance",
+        description: "Maintain complete audit trails and regulatory compliance.  ",
     },
 ];
 

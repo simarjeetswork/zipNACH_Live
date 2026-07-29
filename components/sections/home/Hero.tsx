@@ -42,13 +42,13 @@ function Hero() {
           <div className="flex flex-col items-center justify-center text-center">
             <AnimatedText
               as="p"
-              className="max-w-[623px] w-full border border-[#CACAFF] flex items-center justify-center uppercase rounded-[35px] text-[10px] md:text-sm text-[#3535DD] font-mono bg-white lg:mb-[40px] md:mb-[22px] mb-[20px] py-1 md:py-1 px-2"
+              className="max-w-[623px] w-full border border-[#CACAFF] flex items-center justify-center uppercase rounded-[35px] text-[10px] md:text-sm text-[#3535DD] font-mono bg-white lg:mb-[40px] md:mb-[22px] mb-[16px] py-1 md:py-1 px-2"
             >
               End-to-End Mandate Management → From authentication to
               reconciliation
             </AnimatedText>
             <Heading
-              className="max-w-[958px] mb-3 leading-[120%] text-[var(--text-heading-dark)] font-primary font-medium text-[24px] md:text-[46px] xl:text-[56px]"
+              className="max-w-[958px] mb-3 leading-[120%] text-[var(--text-heading-dark)] font-primary font-medium text-[26px] md:text-[46px] lg:text-[56px]"
               as="h1"
             >
               Simplifying Recurring Collections for Enterprises and Banks.
@@ -56,7 +56,7 @@ function Hero() {
             <AnimatedText
               delay={0.5}
               as="p"
-              className="max-w-[704px] text-[var(--color-gray)] mb-[24px] md:mb-[45px] lg:mb-[55px] text-sm  md:text-[16px]"
+              className="max-w-[704px] text-[var(--color-gray)] mb-[16px] md:mb-[45px] lg:mb-[75px] text-xs md:text-[16px]"
             >
               Digitize your entire recurring process. Enables corporates to use
               their interface or application with the benefits of zipNACH
@@ -101,7 +101,7 @@ function Hero() {
           style={{ transform: "translate(-50%, -50%)" }}
         />
         <div className="container relative z-1 lg:block hidden">
-          <div className="mx-auto max-w-[990px] h-[352px] rounded-[24px] bg-[#FFFFFF1A] p-3 shadow-[2px_2px_12px_0px_#0000001A] backdrop-blur-sm">
+          <div className="mx-auto max-w-[1142px] h-[352px] rounded-[24px] bg-[#FFFFFF1A] p-3 shadow-[2px_2px_12px_0px_#0000001A] backdrop-blur-sm">
             <div className="overflow-hidden rounded-[20px] bg-white shadow-[2px_2px_12px_0px_#0000001A]">
               {/* Tabs */}
               <div className="flex overflow-x-auto border-b border-[#E8EDF7]">

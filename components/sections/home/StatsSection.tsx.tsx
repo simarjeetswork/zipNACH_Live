@@ -8,9 +8,9 @@ import { useRef } from "react";
 
 const stats = [
     { value: "650+", label: "Corporate\nCustomers" },
-    { value: "22+", label: "Banks &\nFinancial Institutions" },
-    { value: "600k+", label: "Mandates\nProcessed" },
-    { value: "2.1M+", label: "Transactions\nProcessed" },
+    { value: "30+", label: "Banks &\nFinancial Institutions" },
+    { value: "45M+", label: "Mandates\nProcessed" },
+    { value: "53M+", label: "Transactions\nProcessed" },
 ];
 
 export default function StatsSection() {

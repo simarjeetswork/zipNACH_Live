@@ -124,9 +124,10 @@ export default function MandateCoverage() {
                 as="h3"
                 className="mt-6 text-2xl sm:text-4xl xl:text-5xl font-light leading-[120%] text-[#052B63]"
               >
-                One platform for every
+                One platform for every {" "}
                 <br className="hidden lg:block" />
-                <span className="font-semibold text-[#004ADE]">mandate workflow.
+                <span className="font-semibold text-[#004ADE]">
+                  mandate workflow.
                 </span>
               </Heading>
             </div>
@@ -138,7 +139,7 @@ export default function MandateCoverage() {
                   ref={(el) => {
                     cardsRef.current[index] = el;
                   }}
-                  className={`relative h-[520px] w-[318px] rounded-t-xl border border-[#E6ECF8] bg-[#ECEFFD] px-8 pt-6 shadow-[2px_2px_12px_0px_rgba(0,0,0,0.10)] ${card.rotate} ${card.translate}`}
+                  className={`relative h-[520px] w-[318px] text-center rounded-t-xl border border-[#E6ECF8] bg-[#ECEFFD] px-8 pt-6 shadow-[2px_2px_12px_0px_rgba(0,0,0,0.10)] ${card.rotate} ${card.translate}`}
                 >
                   <p className="mb-4 text-[10px] font-mono font-regular uppercase tracking-[0.18em] uppercase text-[#032656]">
                     {card.tag}
@@ -162,11 +163,11 @@ export default function MandateCoverage() {
               ))}
             </div>
 
-            <div className="flex flex-wrap items-end justify-center w-full gap-5 pb-12 3xl:hidden" ref={containerRef}>
+            <div className="flex flex-wrap items-end justify-center w-full gap-4 pb-12 3xl:hidden" ref={containerRef}>
               {mandateCards.map((card) => (
                 <div
                   key={card.title}
-                  className={`mdt_bx relative h-[520px] opacity-0 w-full sm:w-[318px] rounded-xl border border-[#E6ECF8] bg-[#ECEFFD] px-8 pt-6 shadow-[2px_2px_12px_0px_rgba(0,0,0,0.10)]`}
+                  className={`mdt_bx relative text-center h-[520px] opacity-0 w-full sm:w-[318px] rounded-xl border border-[#E6ECF8] bg-[#ECEFFD] px-8 pt-6 shadow-[2px_2px_12px_0px_rgba(0,0,0,0.10)]`}
                 >
                   <p className="mb-4 text-[10px] font-mono font-regular uppercase tracking-[0.18em] uppercase text-[#032656]">
                     {card.tag}
