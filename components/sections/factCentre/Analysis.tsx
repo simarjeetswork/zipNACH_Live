@@ -33,7 +33,7 @@ export default function Analysis() {
 
     return (
         <>
-            <section className="fct_glc pt-20 pb-15 sm:pb-20 px-6 relative overflow-hidden bg-white" ref={container}>
+            <section className="fct_glc sm:pt-15 pt-10 pb-15 sm:pb-20 px-6 relative overflow-hidden bg-white" ref={container}>
                 <div className="container mx-auto ">
                     <div className=" w-full lg:w-[90%] mx-auto">
                         <div className="relative z-1 text-center">

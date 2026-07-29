@@ -9,8 +9,8 @@ import { useLenis } from "../SmoothScrollProvider";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "ZipNACH Models", href: "/models" },
   { name: "Fact Centre", href: "/fact-centre" },
+  { name: "ZipNACH Models", href: "/models" },
   { name: "Trust Centre", href: "/trust-centre" },
 ];
 

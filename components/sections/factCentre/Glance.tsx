@@ -12,30 +12,44 @@ export default function Glance() {
     const scaleData = [
         {
             id: 1,
-            heading: "Enterprise \n customers",
+            heading: "Corporate \n Customers",
             data: 650,
             suffix: "+",
 
         },
         {
             id: 2,
-            heading: "Banks & Financial \n Institutions",
-            data: 22,
-            suffix: "+",
+            heading: "Mandates \n Processed",
+            data: 45,
+            suffix: "M+",
 
         },
         {
             id: 3,
-            heading: "Mandates \n Processed",
-            data: 600,
-            suffix: "k+",
+            heading: "Total Mandate\nregistered",
+            data: 36,
+            suffix: "M+",
 
         },
         {
             id: 4,
-            heading: "Transactions \n Processed",
-            data: 2,
-            suffix: ".1M+",
+            heading: "Transaction \n Processed",
+            data: 53,
+            suffix: "M+",
+
+        },
+        {
+            id: 5,
+            heading: "Transaction \n Success",
+            data: 29,
+            suffix: "M+",
+
+        },
+        {
+            id: 6,
+            heading: "Yoeki \n Market Share",
+            data: 42,
+            suffix: ".9%",
 
         },
     ];
@@ -71,7 +85,7 @@ export default function Glance() {
                     <div className="relative z-1 text-center">
                         <AnimatedText as="p" className="text-blue text-center text-xs sm:text-sm uppercase font-mono font-normal bg-chip inline-block px-4 rounded-2xl py-1 mb-5">At a Glance</AnimatedText>
                         <Heading as="h2" className=" text-2xl sm:text-4xl xl:text-5xl leading-[110%] text-center font-light font-primary text-heading mb-12">The scale we operate at.</Heading>
-                        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
+                        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
                             {scaleData.map((data, index) => (
                                 <div key={index} className="bg-[#F1F7FF] rounded-[4px] p-7 sm:p-10 flex flex-col min-h-[100px] md:min-h-[330px] justify-end items-start gln_bx opacity-0">
                                     <Counter delay="0.7" end={data.data} suffix={data.suffix} className="text-primary text-2xl sm:text-5xl font-mono leading-[120%] font-light mb-3" />

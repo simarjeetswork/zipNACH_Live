@@ -1,9 +1,10 @@
 "use client";
 import Chip from "@/components/ui/Chip";
 import Heading from "@/components/ui/Heading";
-import { ScrollTrigger } from "@/lib/gsap/gsap";
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 import Image from "next/image";
 import { useRef } from "react";
 
@@ -55,102 +56,137 @@ export default function SecurityAndReliability() {
     const sliderRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        if (window.innerWidth < 1024) return;
+        const mm = gsap.matchMedia();
 
-        const slider = sliderRef.current;
-        const section = sectionRef.current;
+        mm.add("(min-width: 1024px)", () => {
+            const slider = sliderRef.current;
+            const section = sectionRef.current;
 
-        if (!slider || !section) return;
+            if (!slider || !section) return;
 
-        const cards = slider.children.length;
-        const cardWidth = slider.children[0].clientWidth + 24;
-        const visibleCards = 3;
-        const scrollDistance = (cards - visibleCards) * cardWidth;
-        gsap.to(slider, {
-            x: -scrollDistance,
-            ease: "none",
-            scrollTrigger: {
-                trigger: section,
-                start: "top 30%", // or 25%, 30%
-                end: `+=${scrollDistance}`,
-                pin: true,
-                pinSpacing: true,
-                scrub: 1,
-                // anticipatePin: 1,
-                invalidateOnRefresh: true,
-            }
+
+            const scrollDistance = slider.scrollWidth - section.offsetWidth;
+
+            gsap.to(slider, {
+                x: -scrollDistance - 50,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 10%",
+                    end: `+=${scrollDistance}`,
+                    pin: true,
+                    pinSpacing: true,
+                    scrub: 1,
+                    // anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                },
+            });
         });
-        ScrollTrigger.refresh();
+
+        return () => mm.revert();
     }, []);
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const containerRef = useRef<HTMLDivElement>(null);
+    useGSAP(
+        () => {
+            const box = gsap.utils.selector(containerRef);
+            ScrollTrigger.batch(box(".reli_bx"), {
+                start: "top 80%",
+                once: true,
+                onEnter: (elements) => {
+                    gsap.fromTo(
+                        elements,
+                        {
+                            y: 100,
+                            opacity: 0,
+                        },
+                        {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            stagger: 0.15,
+                            ease: "power3.out",
+                        },
+                    );
+                },
+            });
+        },
+        { scope: containerRef, dependencies: [] },
+    );
+
     return (
-        <section className="py-20 lg:mt-10 px-3">
+        <section className="py-20 px-3">
             <div className="container">
-                <div className="rounded-xl bg-[#032656] px-6 py-14 md:px-12 md:py-20">
-                    <div className="flex justify-center">
-                        <Chip label=" Security & Reliability" textColor="#8CFF93" />
-                    </div>
+                <div className="rounded-xl bg-[#032656] px-6 py-14 md:px-12 md:py-20" >
+                    <div ref={sectionRef}>
+                        <div className="flex justify-center">
+                            <Chip label=" Security & Reliability" textColor="#8CFF93" />
+                        </div>
 
-                    <Heading className="mx-auto max-w-[620px] text-center mb-4 lg:mb-[87px] text-white text-2xl leading-tight font-primary font-light md:text-[40px]">
-                        {" "}
-                        Enterprise-grade reliability
-                        <br />
-                        and governance.
-                    </Heading>
+                        <Heading className="mx-auto max-w-[620px] text-center mb-4 lg:mb-[87px] text-white text-2xl sm:text-4xl xl:text-5xl leading-tight font-primary font-light">
+                            {" "}
+                            Enterprise-grade reliability
+                            <br />
+                            and governance.
+                        </Heading>
 
-                    <div
-                        ref={sectionRef}
-                        className="rounded-xl bg-[#032656] px-6 overflow-hidden"
-                    >
-                        <div ref={sliderRef} className="hidden lg:flex items-stretch gap-6">
-                            {securityCards.map((card) => (
-                                <div
-                                    key={card.id}
-                                    className="w-[380px] flex-shrink-0 rounded-[8px] bg-[#FFFFFF03] p-8 text-center"
-                                >
-                                    <div className="w-[330px] h-[218px] flex items-end justify-center mb-8">
+                        <div
+
+                            className="rounded-xl bg-[#032656] sm:px-6 overflow-hidden"
+                        >
+                            <div ref={sliderRef} className="hidden lg:flex items-stretch gap-6">
+                                {securityCards.map((card) => (
+                                    <div
+                                        key={card.id}
+                                        className="w-[380px] flex-shrink-0 rounded-[8px] bg-[#FFFFFF03] p-8 text-center"
+                                    >
+                                        <div className="w-[330px] h-[218px] flex items-end justify-center mb-8">
+                                            <Image
+                                                src={card.image}
+                                                alt={card.title}
+                                                width={330}
+                                                height={218}
+                                                className="max-h-full w-auto object-contain"
+                                            />
+                                        </div>
+
+                                        <h3 className="text-[18px] font-normal font-secondary text-white">
+                                            {card.title}
+                                        </h3>
+
+                                        <p className="mt-2 mb-0 text-xs leading-7 text-[#FFFFFF99]">
+                                            {card.description}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="grid gap-6 lg:hidden md:grid-cols-2" ref={containerRef}>
+                                {securityCards.map((card) => (
+                                    <div
+                                        key={card.id}
+                                        className="reli_bx rounded-[8px] bg-[#FFFFFF03] px-8 py-10 text-center opacity-0"
+                                    >
                                         <Image
                                             src={card.image}
                                             alt={card.title}
                                             width={330}
-                                            height={218}
-                                            className="max-h-full w-auto object-contain"
+                                            height={220}
+                                            className="mx-auto mb-4 md:mb-8 h-auto"
                                         />
+
+                                        <h3 className="text-[18px] font-normal font-secondary text-white">
+                                            {card.title}
+                                        </h3>
+
+                                        <p className="mt-2 text-xs leading-7 text-[#FFFFFF99]">
+                                            {card.description}
+                                        </p>
                                     </div>
-
-                                    <h3 className="text-[18px] font-normal font-secondary text-white">
-                                        {card.title}
-                                    </h3>
-
-                                    <p className="mt-2 mb-0 text-xs leading-7 text-[#FFFFFF99]">
-                                        {card.description}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="grid gap-6 lg:hidden md:grid-cols-2">
-                            {securityCards.map((card) => (
-                                <div
-                                    key={card.id}
-                                    className="rounded-[8px] bg-[#FFFFFF03] px-8 py-10 text-center"
-                                >
-                                    <Image
-                                        src={card.image}
-                                        alt={card.title}
-                                        width={330}
-                                        height={220}
-                                        className="mx-auto mb-4 md:mb-8 h-auto"
-                                    />
-
-                                    <h3 className="text-[18px] font-normal font-secondary text-white">
-                                        {card.title}
-                                    </h3>
-
-                                    <p className="mt-2 text-xs leading-7 text-[#FFFFFF99]">
-                                        {card.description}
-                                    </p>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

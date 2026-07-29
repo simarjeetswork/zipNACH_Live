@@ -1,7 +1,9 @@
 "use client";
 
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 import { useRef } from "react";
 
 const stats = [
@@ -43,8 +45,37 @@ export default function StatsSection() {
         });
     }, []);
 
+    const containerRef = useRef<HTMLDivElement>(null);
+    const scrollToSection = useScrollToSection();
+    useGSAP(
+        () => {
+            const box = gsap.utils.selector(containerRef);
+            ScrollTrigger.batch(box(".stats_bx"), {
+                start: "top 80%",
+                once: true,
+                onEnter: (elements) => {
+                    gsap.fromTo(
+                        elements,
+                        {
+                            y: 100,
+                            opacity: 0,
+                        },
+                        {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            stagger: 0.15,
+                            ease: "power3.out",
+                        },
+                    );
+                },
+            });
+        },
+        { scope: containerRef, dependencies: [] },
+    );
+
     return (
-        <section className="relative py-20 md:py-[120px] px-3">
+        <section className="relative px-6">
             {/* Grid background */}
             <div
                 className="absolute inset-0 opacity-70"
@@ -81,11 +112,14 @@ export default function StatsSection() {
                         </div>
                     ))}
                 </div>
-                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:hidden">
+                <div
+                    className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:hidden"
+                    ref={containerRef}
+                >
                     {stats.map((item, index) => (
                         <div
                             key={index}
-                            className="rounded-lg bg-white px-6 py-8 text-center"
+                            className="stats_bx rounded-lg bg-white px-6 py-8 text-center opacity-0"
                             style={{
                                 border: "2px dashed #B3B3B3",
                             }}

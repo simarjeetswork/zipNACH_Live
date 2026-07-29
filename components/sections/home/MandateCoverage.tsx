@@ -1,6 +1,7 @@
 "use client";
 import Chip from "@/components/ui/Chip";
 import Heading from "@/components/ui/Heading";
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
@@ -67,13 +68,42 @@ export default function MandateCoverage() {
           trigger: card,
           start: "top 60%",
           toggleActions: "play none none reverse",
-          invalidateOnRefresh: true
         },
       });
     });
   }, []);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollToSection = useScrollToSection();
+  useGSAP(
+    () => {
+      const box = gsap.utils.selector(containerRef);
+      ScrollTrigger.batch(box(".mdt_bx"), {
+        start: "top 80%",
+        once: true,
+        onEnter: (elements) => {
+          gsap.fromTo(
+            elements,
+            {
+              y: 100,
+              opacity: 0,
+            },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power3.out",
+            },
+          );
+        },
+      });
+    },
+    { scope: containerRef, dependencies: [] },
+  );
+
   return (
-    <section className="pt-[80px] mb-1 px-3">
+    <section className="3xl:pt-[80px] mb-8 3xl:mb-1 px-3">
       <div className="container">
         <div className="relative overflow-hidden rounded-2xl border border-[#3F89FF33] bg-white">
           {/* Grid Background */}
@@ -92,12 +122,11 @@ export default function MandateCoverage() {
               <Chip label="Mandate Coverage" />
               <Heading
                 as="h3"
-                className="mt-6 text-[40px] font-light leading-[120%] text-[#052B63]"
+                className="mt-6 text-2xl sm:text-4xl xl:text-5xl font-light leading-[120%] text-[#052B63]"
               >
-                One platform for every {" "}
+                One platform for every
                 <br className="hidden lg:block" />
-                <span className="font-semibold text-[#004ADE]">
-                  mandate workflow.
+                <span className="font-semibold text-[#004ADE]">mandate workflow.
                 </span>
               </Heading>
             </div>
@@ -133,11 +162,11 @@ export default function MandateCoverage() {
               ))}
             </div>
 
-            <div className="flex flex-wrap items-end justify-center gap-4 py-2 3xl:hidden">
+            <div className="flex flex-wrap items-end justify-center w-full gap-5 pb-12 3xl:hidden" ref={containerRef}>
               {mandateCards.map((card) => (
                 <div
                   key={card.title}
-                  className={`relative h-[520px] w-[318px] rounded-t-xl border border-[#E6ECF8] bg-[#ECEFFD] px-8 pt-6 shadow-[2px_2px_12px_0px_rgba(0,0,0,0.10)]`}
+                  className={`mdt_bx relative h-[520px] opacity-0 w-full sm:w-[318px] rounded-xl border border-[#E6ECF8] bg-[#ECEFFD] px-8 pt-6 shadow-[2px_2px_12px_0px_rgba(0,0,0,0.10)]`}
                 >
                   <p className="mb-4 text-[10px] font-mono font-regular uppercase tracking-[0.18em] uppercase text-[#032656]">
                     {card.tag}
