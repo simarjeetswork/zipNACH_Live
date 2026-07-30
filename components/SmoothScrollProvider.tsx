@@ -7,7 +7,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from '@/lib/gsap/gsap';
 import { usePathname } from 'next/navigation';
 
-
 const LenisContext = createContext<Lenis | null>(null);
 export const useLenis = () => useContext(LenisContext);
 
@@ -34,7 +33,7 @@ export default function SmoothScrollProvider({
         setLenis(lenisInstance); // triggers re-render -> context updates
         lenisInstance.on('scroll', ScrollTrigger.update);
         const tickerCallback = (time: number) => {
-            lenisInstance.raf(time * 1000);
+            lenisInstance.raf(time * 700);
         };
         gsap.ticker.add(tickerCallback);
         gsap.ticker.lagSmoothing(0);
@@ -48,20 +47,20 @@ export default function SmoothScrollProvider({
         };
     }, []);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const currentLenis = lenisRef.current;
-        if (!currentLenis) return;
-        currentLenis.scrollTo(0, { immediate: true });
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                // guard: instance may have been torn down between the rAFs (e.g. fast nav/unmount)
-                if (!lenisRef.current) return;
-                lenisRef.current.resize();
-                ScrollTrigger.refresh();
-            });
-        });
-    }, [pathname]);
+    //     const currentLenis = lenisRef.current;
+    //     if (!currentLenis) return;
+    //     currentLenis.scrollTo(0, { immediate: true });
+    //     requestAnimationFrame(() => {
+    //         requestAnimationFrame(() => {
+    //             // guard: instance may have been torn down between the rAFs (e.g. fast nav/unmount)
+    //             if (!lenisRef.current) return;
+    //             lenisRef.current.resize();
+    //             ScrollTrigger.refresh();
+    //         });
+    //     });
+    // }, [pathname]);
 
     return (
         <LenisContext.Provider value={lenis}>

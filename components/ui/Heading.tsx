@@ -41,10 +41,13 @@ const Heading = ({
         () => {
             const elements = gsap.utils.selector(headingRef.current);
 
-            gsap.from(
+            gsap.fromTo(
                 elements(".word > span"),
                 {
                     yPercent: 100,
+                },
+                {
+                    yPercent: 0,
                     stagger: 0.05,
                     delay: 0.1,
                     duration: 1,
@@ -53,6 +56,7 @@ const Heading = ({
                         trigger: headingRef.current,
                         start: "top 85%",
                         once: true,
+                        markers: true
                     }
                 }
             );

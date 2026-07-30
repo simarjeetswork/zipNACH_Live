@@ -1,9 +1,6 @@
 "use client"
 import Heading from "@/components/ui/Heading";
 import AnimatedText from "@/lib/gsap/animations/AnimateText";
-import { ArrowRight } from "lucide-react";
-import { aggregator, corporates, bank } from "@/public/images";
-import Image from "next/image";
 import { useGSAP, gsap, ScrollTrigger } from "@/lib/gsap/gsap";
 import { useRef } from "react";
 import { useScrollToSection } from "@/hooks/useScrollToSection";
@@ -54,17 +51,19 @@ export default function Glance() {
         },
     ];
     const container = useRef<HTMLDivElement>(null);
-    const scrollToSection = useScrollToSection();
     useGSAP(
         () => {
+
             const box = gsap.utils.selector(container);
-            ScrollTrigger.batch(box(".gln_bx"), {
+
+            const triggers = ScrollTrigger.batch(box(".gln_bx"), {
                 start: "top 80%",
                 once: true,
                 onEnter: (elements) => {
                     gsap.fromTo(elements, {
                         y: 100,
                         opacity: 0,
+
                     },
                         {
                             y: 0,
@@ -72,10 +71,13 @@ export default function Glance() {
                             duration: 0.8,
                             stagger: 0.15,
                             ease: "power3.out",
+
+
                         });
                 },
             });
-
+            console.log("triggers created:", triggers.length);
+            console.log("all ScrollTriggers:", ScrollTrigger.getAll().length);
         }, { scope: container, dependencies: [] }
     );
     return (

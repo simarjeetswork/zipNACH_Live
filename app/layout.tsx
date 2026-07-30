@@ -36,13 +36,13 @@ export default function RootLayout({
       className={`${geist.variable} ${geistMono.variable} ${openSans.variable}`}
     >
       <body>
-        <SmoothScrollProvider>
+        {/* <SmoothScrollProvider> */}
           <Header />
           <div className="">
             {children}
           </div>
           <FooterWrapper />
-        </SmoothScrollProvider>
+        {/* </SmoothScrollProvider> */}
       </body>
     </html>
   );
