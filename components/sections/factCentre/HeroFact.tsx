@@ -4,7 +4,6 @@ import AnimatedText from "@/lib/gsap/animations/AnimateText";
 import { ArrowUpRight } from "lucide-react";
 
 export default function HeroFact() {
-
     return (
         <>
             <section className="fxt_hr_x pt-28 pb-25 px-6 relative  bg-[#F1F7FF] overflow-hidden min-h-dvh flex items-center">
@@ -19,7 +18,6 @@ export default function HeroFact() {
                             <AnimatedButton variant="outline" className=" text-base font-semibold text-center" delay={0.3}>View the ecosystem</AnimatedButton>
                         </div>
                     </div>
-
                 </div>
                 <div className="absolute bottom-0 left-0 w-full h-auto"><img src="/images/factCentre/shape.png" alt="Shape" className="w-full" /></div>
             </section>

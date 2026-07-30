@@ -66,7 +66,6 @@ export default function SecurityAndReliability() {
 
 
             const scrollDistance = slider.scrollWidth - section.offsetWidth;
-
             gsap.to(slider, {
                 x: -scrollDistance - 50,
                 ease: "none",
