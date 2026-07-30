@@ -47,20 +47,20 @@ export default function SmoothScrollProvider({
         };
     }, []);
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     const currentLenis = lenisRef.current;
-    //     if (!currentLenis) return;
-    //     currentLenis.scrollTo(0, { immediate: true });
-    //     requestAnimationFrame(() => {
-    //         requestAnimationFrame(() => {
-    //             // guard: instance may have been torn down between the rAFs (e.g. fast nav/unmount)
-    //             if (!lenisRef.current) return;
-    //             lenisRef.current.resize();
-    //             ScrollTrigger.refresh();
-    //         });
-    //     });
-    // }, [pathname]);
+        const currentLenis = lenisRef.current;
+        if (!currentLenis) return;
+        currentLenis.scrollTo(0, { immediate: true });
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                // guard: instance may have been torn down between the rAFs (e.g. fast nav/unmount)
+                if (!lenisRef.current) return;
+                lenisRef.current.resize();
+                ScrollTrigger.refresh();
+            });
+        });
+    }, [pathname]);
 
     return (
         <LenisContext.Provider value={lenis}>
