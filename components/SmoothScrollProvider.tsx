@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from '@/lib/gsap/gsap';
+import { usePathname } from 'next/navigation';
 
 const LenisContext = createContext<Lenis | null>(null);
 
@@ -15,7 +16,7 @@ export default function SmoothScrollProvider({
     children: React.ReactNode;
 }) {
     const lenisRef = useRef<Lenis | null>(null);
-
+    const pathname = usePathname()
     useEffect(() => {
         const lenis = new Lenis({
             lerp: 0.08,
@@ -43,7 +44,19 @@ export default function SmoothScrollProvider({
             lenisRef.current = null;
         };
     }, []);
+    useEffect(() => {
+        if (!lenisRef.current) return;
 
+        lenisRef.current.scrollTo(0, {
+            immediate: true,
+            force: true,
+        });
+
+        requestAnimationFrame(() => {
+            lenisRef.current?.resize();
+            ScrollTrigger.refresh();
+        });
+    }, [pathname]);
     return (
         <LenisContext.Provider value={lenisRef.current}>
             {children}
