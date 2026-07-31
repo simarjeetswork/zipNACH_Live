@@ -37,7 +37,7 @@ function Hero() {
   return (
     <>
       <GridBackground />
-      <div className="flex items-center justify-center pt-36 px-6">
+      <div className="flex items-center justify-center pt-52 px-6">
         <div className="container">
           <div className="flex flex-col items-center justify-center text-center">
             <AnimatedText

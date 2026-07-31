@@ -2,9 +2,9 @@
 import Heading from "@/components/ui/Heading";
 import AnimatedText from "@/lib/gsap/animations/AnimateText";
 import { useGSAP, gsap, ScrollTrigger } from "@/lib/gsap/gsap";
-import { useRef } from "react";
-import { useScrollToSection } from "@/hooks/useScrollToSection";
+import { useEffect, useRef } from "react";
 import Counter from "@/components/ui/Counter";
+import { afterPaint } from "@/components/useAfterPaint";
 export default function Glance() {
     const scaleData = [
         {
@@ -51,34 +51,31 @@ export default function Glance() {
         },
     ];
     const container = useRef<HTMLDivElement>(null);
-    useGSAP(
-        () => {
-
-            const box = gsap.utils.selector(container);
-
-            const triggers = ScrollTrigger.batch(box(".gln_bx"), {
-                start: "top 80%",
-                once: true,
-                onEnter: (elements) => {
-                    gsap.fromTo(elements, {
-                        y: 100,
-                        opacity: 0,
-
+    useGSAP((context) => {
+        return afterPaint(() => {
+            context.add(() => {
+                const box = gsap.utils.selector(container);
+                ScrollTrigger.batch(box(".gln_bx"), {
+                    start: "top 80%",
+                    once: true,
+                    onEnter: (elements) => {
+                        gsap.fromTo(elements, {
+                            y: 100,
+                            opacity: 0,
+                        },
+                            {
+                                y: 0,
+                                opacity: 1,
+                                duration: 0.8,
+                                stagger: 0.15,
+                                ease: "power3.out",
+                            });
                     },
-                        {
-                            y: 0,
-                            opacity: 1,
-                            duration: 0.8,
-                            stagger: 0.15,
-                            ease: "power3.out",
+                });
 
-
-                        });
-                },
-            });
-            console.log("triggers created:", triggers.length);
-            console.log("all ScrollTriggers:", ScrollTrigger.getAll().length);
-        }, { scope: container, dependencies: [] }
+            })
+        })
+    }, { scope: container, dependencies: [] }
     );
     return (
         <>

@@ -10,15 +10,14 @@ import TrustedCompanies from "@/components/sections/home/TrustedCompanies";
 export default function Home() {
   return (
     <>
-      <div>
-        <Hero />
-        <TrustedCompanies />
-        <Operations />
-        <StatsSection />
-        <SecurityAndReliability />
-        <MandateCoverage />
-        <BottomBanner />
-      </div>
+      <Hero />
+      <TrustedCompanies />
+      <Operations />
+      <StatsSection />
+      <SecurityAndReliability />
+      <MandateCoverage />
+      <BottomBanner />
+
     </>
   );
 }

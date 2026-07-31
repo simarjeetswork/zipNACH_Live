@@ -56,7 +56,6 @@ const Heading = ({
                         trigger: headingRef.current,
                         start: "top 85%",
                         once: true,
-                        markers: true
                     }
                 }
             );

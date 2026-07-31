@@ -2,12 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
+import { ScrollTrigger, useGSAP } from "@/lib/gsap/gsap";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GridBackground from "../ui/GridBackground";
 
-gsap.registerPlugin(ScrollTrigger);
 
 const navLinks = [
   { name: "Home", href: "/" },

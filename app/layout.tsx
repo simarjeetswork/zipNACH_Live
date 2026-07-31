@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import FooterWrapper from "@/components/layout/FooterWrapper";
+import ScrollTriggerRefresh from "@/components/ScrollTriggerRefresh";
 const geist = Geist({
   variable: "--font-geist",
   subsets: ["latin"],
@@ -36,13 +37,13 @@ export default function RootLayout({
       className={`${geist.variable} ${geistMono.variable} ${openSans.variable}`}
     >
       <body>
-        <SmoothScrollProvider>
-          <Header />
-          <div className="">
-            {children}
-          </div>
-          <FooterWrapper />
-        </SmoothScrollProvider>
+        {/* <SmoothScrollProvider> */}
+        <ScrollTriggerRefresh />
+        <Header />
+        {children}
+
+        <FooterWrapper />
+        {/* </SmoothScrollProvider> */}
       </body>
     </html>
   );

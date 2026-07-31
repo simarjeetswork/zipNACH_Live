@@ -12,6 +12,7 @@ const navLinks = [
   { name: "Fact Centre", href: "/fact-centre" },
   { name: "ZipNACH Models", href: "/models" },
   { name: "Trust Centre", href: "/trust-centre" },
+
 ];
 
 export default function Header() {
@@ -54,10 +55,14 @@ export default function Header() {
             alt="ZipNACH"
             width={140}
             height={36}
+            onClick={() => {
+              lenis!.stop();
+            }}
             priority
             className="w-[110px] md:w-[140px] h-auto"
           />
         </Link>
+
 
         {/* Desktop nav */}
         <nav className="hidden h-full items-center lg:flex">

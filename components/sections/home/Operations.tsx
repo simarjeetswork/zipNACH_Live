@@ -56,6 +56,7 @@ export default function Operations() {
 
         tl.fromTo(mainImageRef.current, { opacity: 0 }, { opacity: 1 })
         tl.fromTo(networkDiagramRef.current, { opacity: 0 }, { opacity: 1 })
+
     },
     ), { scope: containerRef };
 

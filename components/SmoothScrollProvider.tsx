@@ -28,7 +28,6 @@ export default function SmoothScrollProvider({
             syncTouch: false,
             autoRaf: false, // critical: prevents Lenis's own internal rAF loop from fighting GSAP's ticker
         });
-
         lenisRef.current = lenisInstance;
         setLenis(lenisInstance); // triggers re-render -> context updates
         lenisInstance.on('scroll', ScrollTrigger.update);
@@ -51,9 +50,12 @@ export default function SmoothScrollProvider({
 
         const currentLenis = lenisRef.current;
         if (!currentLenis) return;
+
+
         currentLenis.scrollTo(0, { immediate: true });
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
+                window.scrollTo(0, 0);
                 // guard: instance may have been torn down between the rAFs (e.g. fast nav/unmount)
                 if (!lenisRef.current) return;
                 lenisRef.current.resize();
