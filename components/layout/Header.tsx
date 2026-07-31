@@ -55,9 +55,6 @@ export default function Header() {
             alt="ZipNACH"
             width={140}
             height={36}
-            onClick={() => {
-              lenis!.stop();
-            }}
             priority
             className="w-[110px] md:w-[140px] h-auto"
           />
