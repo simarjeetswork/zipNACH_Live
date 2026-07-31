@@ -39,7 +39,7 @@ export default function RootLayout({
       <body>
 
         <SmoothScrollProvider>
-          <ScrollTriggerRefresh />
+          {/* <ScrollTriggerRefresh /> */}
           <Header />
           {children}
 
