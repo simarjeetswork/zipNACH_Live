@@ -32,18 +32,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
+    <html data-scroll-behavior="smooth"
       lang="en"
       className={`${geist.variable} ${geistMono.variable} ${openSans.variable}`}
     >
       <body>
         {/* <SmoothScrollProvider> */}
-        <ScrollTriggerRefresh />
-        <Header />
-        {children}
+        <SmoothScrollProvider>
+          {/* <ScrollTriggerRefresh /> */}
+          <Header />
+          {children}
 
-        <FooterWrapper />
-        {/* </SmoothScrollProvider> */}
+          <FooterWrapper />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

@@ -1,17 +1,27 @@
-"use client";
+'use client';
 
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { ScrollTrigger } from '@/lib/gsap/gsap';
+import { useLenis } from './SmoothScrollProvider';
 
-export default function ScrollTriggerRefresh() {
+export default function ScrollRefresh() {
     const pathname = usePathname();
-    useEffect(() => {
+    const lenis = useLenis();
 
+    useEffect(() => {
         requestAnimationFrame(() => {
-            ScrollTrigger.refresh();
+            lenis?.scrollTo(0, {
+                immediate: true,
+                force: true,
+            });
+
+            requestAnimationFrame(() => {
+                lenis?.resize();
+                ScrollTrigger.refresh();
+            });
         });
-    }, [pathname]);
+    }, [pathname, lenis]);
 
     return null;
 }
